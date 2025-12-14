@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="بصمة - وكالة إبداعية متخصصة في التصميم الجرافيكي، المونتاج، AI Creative Workflow والكورسات التعليمية">
+    <meta name="keywords" content="بصمة, تصميم, مونتاج, موشن جرافيك, كورسات, أفريقيا">
+    <title>بصمة | الإبداع التقني بلمسة أفريقية</title>
+
+    <!-- Google Fonts - Cairo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- ===== Header ===== -->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="nav-link active">الرئيسية</a></li>
+                <li><a href="#features" class="nav-link">خدماتنا</a></li>
+                <li><a href="#portfolio" class="nav-link">أعمالنا</a></li>
+                <li><a href="#courses" class="nav-link">الكورسات</a></li>
+                <li><a href="#contact" class="nav-link btn-primary">تواصل معنا</a></li>
+            </ul>
+
+            <button class="mobile-toggle" id="mobileToggle" aria-label="القائمة">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- ===== Hero Section ===== -->
+    <section class="hero section" id="home">
+        <!-- Video Background -->
+        <div class="hero-video-container">
+            <video autoplay muted loop playsinline class="hero-video">
+                <source src="VIDEO.mp4" type="video/mp4">
+            </video>
+            <div class="hero-video-overlay"></div>
+        </div>
+
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="dot"></span>
+                <span>نصنع الإبداع من قلب أفريقيا</span>
+            </div>
+
+            <h1 class="hero-title">
+                حوّل أفكارك إلى <span class="highlight">محتوى إبداعي</span> مذهل
+            </h1>
+
+            <p class="hero-description">
+                ندمج الذكاء الاصطناعي مع الفن لنقدم لك تجربة بصرية لا تُنسى. من الموشن جرافيك للتصميم والمونتاج - نحن
+                شريكك الإبداعي.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="#contact" class="btn btn-primary">
+                    <i class="fas fa-rocket"></i>
+                    ابدأ مشروعك
+                </a>
+                <a href="#portfolio" class="btn btn-outline">
+                    <i class="fas fa-play"></i>
+                    شاهد أعمالنا
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Features Section ===== -->
+    <section class="features section" id="features">
+        <div class="container">
+            <div class="features-header">
+                <div class="section-badge">
+                    <i class="fas fa-sparkles"></i>
+                    <span>خدماتنا المميزة</span>
+                </div>
+                <h2 class="section-title">
+                    أدوات <span class="gradient-text">احترافية</span> لتحقيق رؤيتك
+                </h2>
+                <p class="section-subtitle mx-auto">
+                    نقدم حلولاً إبداعية متكاملة تجمع بين التقنية والفن لتحقيق نتائج استثنائية
+                </p>
+            </div>
+
+            <div class="features-grid">
+                <!-- Feature 1 -->
+                <div class="feature-card reveal">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 class="feature-title">AI Creative Workflow</h3>
+                    <p class="feature-description">
+                        نستخدم أحدث تقنيات الذكاء الاصطناعي لتسريع عملية الإنتاج الإبداعي مع الحفاظ على الجودة
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="feature-card reveal">
+                    <div class="feature-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3 class="feature-title">التصميم الجرافيكي</h3>
+                    <p class="feature-description">
+                        تصاميم احترافية تعكس هويتك البصرية، من الشعارات إلى المواد التسويقية
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="feature-card reveal">
+                    <div class="feature-icon">
+                        <i class="fas fa-film"></i>
+                    </div>
+                    <h3 class="feature-title">المونتاج الاحترافي</h3>
+                    <p class="feature-description">
+                        نحول لقطاتك إلى قصص مؤثرة، مع تأثيرات بصرية مذهلة تجذب المشاهدين
+                    </p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="feature-card reveal">
+                    <div class="feature-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="feature-title">الكورسات التعليمية</h3>
+                    <p class="feature-description">
+                        تعلم أسرار الموشن جرافيك والتصميم من خلال كورسات عملية للمبدعين العرب
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Insights Section ===== -->
+    <section class="insights section" id="insights">
+        <div class="container">
+            <div class="insights-grid">
+                <div class="insights-content">
+                    <div class="section-badge">
+                        <i class="fas fa-chart-line"></i>
+                        <span>لماذا بصمة؟</span>
+                    </div>
+                    <h2 class="section-title">
+                        خطوات بسيطة لنتائج <span class="gradient-text">استثنائية</span>
+                    </h2>
+                    <p class="section-subtitle">
+                        نعمل معك خطوة بخطوة لتحويل رؤيتك إلى واقع مذهل
+                    </p>
+
+                    <div class="insights-list">
+                        <div class="insight-item active">
+                            <div class="insight-number">01</div>
+                            <div class="insight-text">
+                                <h4>استشارة مجانية</h4>
+                                <p>نفهم متطلباتك ونقدم لك أفضل الحلول المناسبة</p>
+                            </div>
+                        </div>
+
+                        <div class="insight-item">
+                            <div class="insight-number">02</div>
+                            <div class="insight-text">
+                                <h4>التخطيط والتنفيذ</h4>
+                                <p>نضع خطة عمل واضحة ونبدأ في تنفيذ المشروع</p>
+                            </div>
+                        </div>
+
+                        <div class="insight-item">
+                            <div class="insight-number">03</div>
+                            <div class="insight-text">
+                                <h4>المراجعة والتسليم</h4>
+                                <p>نراجع العمل معك ونسلمه بأعلى جودة</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="insights-visual">
+                    <div class="insights-image">
+                        <img src="logo.jpeg" alt="بصمة للإبداع">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Portfolio Section ===== -->
+    <section class="portfolio section" id="portfolio">
+        <div class="container">
+            <div class="portfolio-header">
+                <div class="section-badge">
+                    <i class="fas fa-folder-open"></i>
+                    <span>أعمالنا</span>
+                </div>
+                <h2 class="section-title">
+                    نماذج من <span class="gradient-text">أعمالنا</span>
+                </h2>
+                <p class="section-subtitle mx-auto">
+                    استكشف مجموعة من أحدث مشاريعنا في الموشن جرافيك والتصميم
+                </p>
+            </div>
+
+            <div class="portfolio-grid" id="portfolioGrid">
+                <!-- سيتم تحميل الأعمال من قاعدة البيانات -->
+                <div class="loading-placeholder"
+                    style="grid-column: span 3; padding: 60px; text-align: center; color: rgba(255,255,255,0.5);">
+                    <i class="fas fa-spinner fa-spin fa-2x"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Testimonials Section ===== -->
+    <section class="testimonials section" id="testimonials">
+        <div class="container">
+            <div class="testimonials-header">
+                <div class="section-badge">
+                    <i class="fas fa-quote-right"></i>
+                    <span>آراء العملاء</span>
+                </div>
+                <h2 class="section-title">
+                    ماذا يقول <span class="gradient-text">عملاؤنا</span>
+                </h2>
+            </div>
+        </div>
+
+        <div class="testimonials-track" id="testimonialsTrack">
+            <!-- سيتم تحميل الآراء من قاعدة البيانات -->
+            <div class="loading-placeholder" style="padding: 40px; text-align: center; color: rgba(255,255,255,0.5);">
+                <i class="fas fa-spinner fa-spin"></i> جاري التحميل...
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== How It Works Section ===== -->
+    <section class="how-it-works section" id="how-it-works">
+        <div class="container">
+            <div class="how-it-works-header">
+                <div class="section-badge">
+                    <i class="fas fa-cogs"></i>
+                    <span>كيف نعمل</span>
+                </div>
+                <h2 class="section-title">
+                    ثلاث خطوات <span class="gradient-text">لنجاحك</span>
+                </h2>
+                <p class="section-subtitle mx-auto">
+                    نسهّل عليك العملية الإبداعية في خطوات واضحة ومحددة
+                </p>
+            </div>
+
+            <div class="steps-grid">
+                <div class="step-card reveal">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">تحديد الأهداف</h3>
+                    <p class="step-description">
+                        نتعرف على رؤيتك وأهدافك ونضع خطة واضحة لتحقيقها بأفضل طريقة ممكنة
+                    </p>
+                </div>
+
+                <div class="step-card reveal">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">التصميم والتنفيذ</h3>
+                    <p class="step-description">
+                        نبدأ في تحويل الأفكار إلى واقع مع متابعة مستمرة وتعديلات حسب ملاحظاتك
+                    </p>
+                </div>
+
+                <div class="step-card reveal">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">التسليم والدعم</h3>
+                    <p class="step-description">
+                        نسلم المشروع بأعلى جودة مع دعم فني مستمر لضمان رضاك التام
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Courses Section ===== -->
+    <section class="courses section" id="courses">
+        <div class="container">
+            <div class="courses-header">
+                <div class="section-badge">
+                    <i class="fas fa-book-open"></i>
+                    <span>الكورسات التعليمية</span>
+                </div>
+                <h2 class="section-title">
+                    تعلم وطور <span class="gradient-text">مهاراتك</span>
+                </h2>
+                <p class="section-subtitle mx-auto">
+                    كورسات عملية من خبراء في المجال لتأهيلك للعمل الحر والاحتراف
+                </p>
+            </div>
+
+            <div class="courses-grid" id="coursesGrid">
+                <!-- سيتم تحميل الكورسات من قاعدة البيانات -->
+                <div class="loading-placeholder"
+                    style="grid-column: span 3; padding: 60px; text-align: center; color: rgba(255,255,255,0.5);">
+                    <i class="fas fa-spinner fa-spin fa-2x"></i>
+                    <p style="margin-top: 16px;">جاري تحميل الكورسات...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA Section ===== -->
+    <section class="cta-section" id="contact">
+        <div class="container">
+            <div class="cta-box">
+                <h2 class="cta-title">
+                    جاهز لتحويل أفكارك إلى واقع؟
+                </h2>
+                <p class="cta-description">
+                    تواصل معنا الآن ودعنا نبدأ رحلتك الإبداعية. نحن هنا لجعل رؤيتك حقيقة.
+                </p>
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i>
+                        ابدأ الآن
+                    </a>
+                    <a href="#" class="btn btn-secondary">
+                        <i class="fab fa-whatsapp"></i>
+                        تواصل واتساب
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Footer ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <!-- Brand -->
+                <div class="footer-brand">
+                    <img src="logo.jpeg" alt="بصمة" class="footer-logo">
+                    <p class="footer-description">
+                        بصمة - وكالة إبداعية من قلب أفريقيا، نجمع بين الهوية الثقافية والابتكار التقني
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="TikTok">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Twitter">
+                            <i class="fab fa-x-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="footer-title">روابط سريعة</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home" class="footer-link">الرئيسية</a></li>
+                        <li><a href="#features" class="footer-link">خدماتنا</a></li>
+                        <li><a href="#portfolio" class="footer-link">أعمالنا</a></li>
+                        <li><a href="#courses" class="footer-link">الكورسات</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <h4 class="footer-title">خدماتنا</h4>
+                    <ul class="footer-links">
+                        <li><a href="#" class="footer-link">موشن جرافيك</a></li>
+                        <li><a href="#" class="footer-link">تصميم جرافيك</a></li>
+                        <li><a href="#" class="footer-link">مونتاج فيديو</a></li>
+                        <li><a href="#" class="footer-link">AI Workflow</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="footer-title">تواصل معنا</h4>
+                    <ul class="footer-links">
+                        <li><a href="#" class="footer-link">info@basma.com</a></li>
+                        <li><a href="#" class="footer-link">+20 123 456 789</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="footer-copyright">
+                    © 2024 <span>بصمة</span> - جميع الحقوق محفوظة | صنع بـ ❤️ في أفريقيا
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== JavaScript ===== -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
