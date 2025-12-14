@@ -1,0 +1,10 @@
+# Robots.txt for basmaweb.online
+User-agent: *
+Allow: /
+Disallow: /admin/
+
+# Sitemap
+Sitemap: https://basmaweb.online/sitemap.xml
+
+# Crawl-delay (optional, for polite crawling)
+Crawl-delay: 10
