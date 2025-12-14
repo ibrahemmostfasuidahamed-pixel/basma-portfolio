@@ -226,6 +226,65 @@ async function deleteMenuItem(id) {
     if (error) throw error;
 }
 
+// ===== Course Lessons =====
+async function getCourseLessons(courseId) {
+    const { data, error } = await supabaseClient
+        .from('course_lessons')
+        .select('*')
+        .eq('course_id', courseId)
+        .order('sort_order', { ascending: true });
+
+    if (error) {
+        console.error('Error fetching lessons:', error);
+        return [];
+    }
+    return data;
+}
+
+async function getAllLessons() {
+    const { data, error } = await supabaseClient
+        .from('course_lessons')
+        .select('*, courses(title)')
+        .order('course_id', { ascending: true })
+        .order('sort_order', { ascending: true });
+
+    if (error) {
+        console.error('Error fetching all lessons:', error);
+        return [];
+    }
+    return data;
+}
+
+async function addLesson(lesson) {
+    const { data, error } = await supabaseClient
+        .from('course_lessons')
+        .insert([lesson])
+        .select();
+
+    if (error) throw error;
+    return data;
+}
+
+async function updateLesson(id, updates) {
+    const { data, error } = await supabaseClient
+        .from('course_lessons')
+        .update(updates)
+        .eq('id', id)
+        .select();
+
+    if (error) throw error;
+    return data;
+}
+
+async function deleteLesson(id) {
+    const { error } = await supabaseClient
+        .from('course_lessons')
+        .delete()
+        .eq('id', id);
+
+    if (error) throw error;
+}
+
 // Export for use
 // ===== Image Upload =====
 async function uploadImage(file, folder = 'courses') {
@@ -284,6 +343,11 @@ window.db = {
     addMenuItem,
     updateMenuItem,
     deleteMenuItem,
+    getCourseLessons,
+    getAllLessons,
+    addLesson,
+    updateLesson,
+    deleteLesson,
     uploadImage,
     deleteImage,
     signIn,

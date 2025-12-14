@@ -267,17 +267,12 @@ async function loadCourses() {
 
         if (courses && courses.length > 0) {
             coursesGrid.innerHTML = courses.map(course => {
-                const hasVideo = course.video_url && course.video_url.trim() !== '';
-                const embedUrl = hasVideo ? convertToEmbedUrl(course.video_url) : null;
-
                 return `
-                <div class="course-card reveal visible" ${hasVideo ? `onclick="openVideoModal('${embedUrl}', '${course.title}')" style="cursor: pointer;"` : ''}>
+                <a href="course.html?id=${course.id}" class="course-card reveal visible" style="text-decoration: none;">
                     <div class="course-thumbnail">
-                        ${hasVideo ? `
-                            <div class="course-video-badge">
-                                <i class="fas fa-play"></i>
-                            </div>
-                        ` : ''}
+                        <div class="course-video-badge">
+                            <i class="fas fa-play"></i>
+                        </div>
                         <img src="${course.thumbnail_url || 'https://images.unsplash.com/photo-1626785774625-ddcddc3445e9?w=600&h=338&fit=crop'}" 
                              alt="${course.title}">
                         ${course.badge ? `<span class="course-badge">${course.badge}</span>` : ''}
@@ -290,7 +285,7 @@ async function loadCourses() {
                             <span><i class="fas fa-users"></i> ${formatNumber(course.students_count)} طالب</span>
                         </div>
                     </div>
-                </div>
+                </a>
             `}).join('');
         } else {
             coursesGrid.innerHTML = `

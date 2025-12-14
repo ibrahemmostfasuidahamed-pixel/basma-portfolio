@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="مشاهدة الكورس - بصمة للإبداع">
+    <title>مشاهدة الكورس - بصمة</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="course-player.css">
+</head>
+
+<body class="course-page">
+    <!-- Course Player Container -->
+    <div class="course-player-container">
+
+        <!-- Main Content Area -->
+        <div class="course-main">
+            <!-- Header -->
+            <header class="course-header">
+                <a href="index.html" class="back-btn">
+                    <i class="fas fa-arrow-right"></i>
+                    <span>العودة للرئيسية</span>
+                </a>
+                <h1 class="course-title" id="courseTitle">جاري التحميل...</h1>
+            </header>
+
+            <!-- Video Player -->
+            <div class="video-player-wrapper">
+                <div class="video-player" id="videoPlayer">
+                    <div class="video-placeholder">
+                        <i class="fas fa-play-circle"></i>
+                        <p>اختر درس للبدء</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Current Lesson Info -->
+            <div class="lesson-info" id="lessonInfo">
+                <h2 class="lesson-title" id="lessonTitle">اختر درساً للبدء</h2>
+                <div class="lesson-meta">
+                    <span id="lessonDuration"><i class="fas fa-clock"></i> --:--</span>
+                    <span id="lessonOrder"><i class="fas fa-list-ol"></i> الدرس -- من --</span>
+                </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="lesson-navigation">
+                <button class="nav-btn prev-btn" id="prevBtn" disabled>
+                    <i class="fas fa-arrow-right"></i>
+                    <span>الدرس السابق</span>
+                </button>
+                <button class="nav-btn complete-btn" id="completeBtn">
+                    <i class="fas fa-check"></i>
+                    <span>إكمال ومتابعة</span>
+                </button>
+                <button class="nav-btn next-btn" id="nextBtn" disabled>
+                    <span>الدرس التالي</span>
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Sidebar - Lessons List -->
+        <aside class="course-sidebar">
+            <div class="sidebar-header">
+                <h3><i class="fas fa-list"></i> قائمة الدروس</h3>
+                <div class="progress-info">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                    </div>
+                    <span class="progress-text" id="progressText">0%</span>
+                </div>
+            </div>
+
+            <div class="lessons-list" id="lessonsList">
+                <!-- Lessons will be loaded here -->
+                <div class="loading-lessons">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>جاري تحميل الدروس...</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Mobile Sidebar Toggle -->
+        <button class="sidebar-toggle" id="sidebarToggle">
+            <i class="fas fa-list"></i>
+        </button>
+    </div>
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="course-player.js"></script>
+</body>
+
+</html>
