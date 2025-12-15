@@ -1357,12 +1357,13 @@ button {
 
     /* Hero Section Mobile - Professional Design */
     .hero {
-        min-height: 100vh;
-        padding-top: 80px;
+        min-height: auto;
+        padding-top: 70px;
+        padding-bottom: var(--spacing-xl);
     }
 
     .hero-content {
-        padding: var(--spacing-xl) 0;
+        padding: var(--spacing-lg) 0 var(--spacing-md);
     }
 
     .hero-badge {
