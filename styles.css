@@ -1616,3 +1616,113 @@ button {
         padding: var(--spacing-md);
     }
 }
+
+/* ===== Mobile Bottom Navigation ===== */
+.mobile-bottom-nav {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+    padding: var(--spacing-sm) var(--spacing-xs);
+    z-index: 1000;
+    justify-content: space-around;
+    align-items: center;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+.bottom-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: var(--text-tertiary);
+    text-decoration: none;
+    font-size: var(--font-size-xs);
+    padding: var(--spacing-xs);
+    border-radius: var(--radius-md);
+    transition: var(--transition-fast);
+    min-width: 60px;
+}
+
+.bottom-nav-item i {
+    font-size: 1.25rem;
+}
+
+.bottom-nav-item span {
+    font-size: 0.65rem;
+    font-weight: 500;
+}
+
+.bottom-nav-item.active,
+.bottom-nav-item:hover {
+    color: var(--accent-orange);
+}
+
+.bottom-nav-item.active {
+    background: rgba(255, 107, 53, 0.1);
+}
+
+/* Show bottom nav only on mobile */
+@media (max-width: 768px) {
+    .mobile-bottom-nav {
+        display: flex;
+    }
+
+    /* Add padding to body to prevent content from hiding behind bottom nav */
+    body {
+        padding-bottom: 80px;
+    }
+
+    /* Hide desktop nav toggle text */
+    .nav-links {
+        top: 60px;
+        height: calc(100vh - 60px - 80px);
+    }
+
+    /* Make header smaller on mobile */
+    .header {
+        padding: var(--spacing-xs) 0;
+    }
+
+    /* Courses horizontal scroll on mobile */
+    .courses-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: var(--spacing-md);
+        padding-bottom: var(--spacing-md);
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .courses-grid::-webkit-scrollbar {
+        display: none;
+    }
+
+    .course-card {
+        flex: 0 0 280px;
+        scroll-snap-align: start;
+    }
+
+    /* Portfolio horizontal scroll on mobile */
+    .portfolio-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: var(--spacing-md);
+        padding-bottom: var(--spacing-md);
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .portfolio-grid::-webkit-scrollbar {
+        display: none;
+    }
+
+    .portfolio-card {
+        flex: 0 0 260px;
+        scroll-snap-align: start;
+    }
+}
