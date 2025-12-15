@@ -1347,20 +1347,224 @@ button {
 }
 
 @media (max-width: 480px) {
+    :root {
+        --font-size-6xl: 2rem;
+        --font-size-5xl: 1.75rem;
+        --font-size-4xl: 1.5rem;
+        --font-size-3xl: 1.25rem;
+        --font-size-2xl: 1.125rem;
+        --spacing-section: 60px;
+    }
+
     .container {
         padding: 0 var(--spacing-md);
+    }
+
+    /* Hero Section Mobile */
+    .hero-content {
+        padding: var(--spacing-lg) 0;
+    }
+
+    .hero-title {
+        font-size: var(--font-size-4xl);
+        line-height: 1.3;
+    }
+
+    .hero-description {
+        font-size: var(--font-size-sm);
     }
 
     .hero-buttons {
         flex-direction: column;
         width: 100%;
+        gap: var(--spacing-sm);
     }
 
     .btn {
         width: 100%;
+        padding: var(--spacing-md) var(--spacing-lg);
+        font-size: var(--font-size-sm);
+    }
+
+    /* Section Titles Mobile */
+    .section-title {
+        font-size: var(--font-size-2xl);
+    }
+
+    .section-subtitle {
+        font-size: var(--font-size-sm);
+    }
+
+    .section-badge {
+        font-size: var(--font-size-xs);
+        padding: 6px 12px;
+    }
+
+    /* Features Mobile */
+    .feature-card {
+        padding: var(--spacing-lg);
+    }
+
+    .feature-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.25rem;
+    }
+
+    .feature-title {
+        font-size: var(--font-size-lg);
+    }
+
+    /* Insights Mobile */
+    .insight-item {
+        padding: var(--spacing-md);
+    }
+
+    .insight-number {
+        width: 36px;
+        height: 36px;
+        font-size: var(--font-size-sm);
+    }
+
+    .insights-image img {
+        max-width: 200px;
+    }
+
+    /* Portfolio Mobile */
+    .portfolio-card {
+        border-radius: var(--radius-lg);
+    }
+
+    .portfolio-video-badge {
+        width: 50px;
+        height: 50px;
+        font-size: 1rem;
+    }
+
+    .portfolio-content {
+        padding: var(--spacing-md);
+    }
+
+    .portfolio-title {
+        font-size: var(--font-size-base);
+    }
+
+    /* Courses Mobile */
+    .course-card {
+        border-radius: var(--radius-lg);
+    }
+
+    .course-video-badge {
+        width: 50px;
+        height: 50px;
+        font-size: 1rem;
+    }
+
+    .course-content {
+        padding: var(--spacing-md);
+    }
+
+    .course-title {
+        font-size: var(--font-size-base);
+    }
+
+    .course-meta {
+        font-size: var(--font-size-xs);
+        flex-wrap: wrap;
+    }
+
+    /* Testimonials Mobile */
+    .testimonial-card {
+        width: 280px;
+        padding: var(--spacing-lg);
+    }
+
+    .testimonial-text {
+        font-size: var(--font-size-sm);
+    }
+
+    /* Steps Mobile */
+    .steps-grid {
+        gap: var(--spacing-lg);
+    }
+
+    .step-card {
+        padding: var(--spacing-lg);
+    }
+
+    .step-number {
+        width: 50px;
+        height: 50px;
+        font-size: var(--font-size-xl);
+    }
+
+    /* CTA Mobile */
+    .cta-title {
+        font-size: var(--font-size-2xl);
+    }
+
+    .cta-subtitle {
+        font-size: var(--font-size-sm);
+    }
+
+    /* Footer Mobile */
+    .footer-brand-name {
+        font-size: var(--font-size-xl);
+    }
+
+    .footer-description {
+        font-size: var(--font-size-sm);
+    }
+
+    .social-link {
+        width: 40px;
+        height: 40px;
+    }
+
+    .footer-bottom {
+        padding: var(--spacing-md) 0;
+        font-size: var(--font-size-xs);
+    }
+
+    /* Video Modal Mobile */
+    .video-modal-content {
+        width: 95%;
+        margin: var(--spacing-sm);
+    }
+
+    .video-modal-title {
+        font-size: var(--font-size-base);
+    }
+
+    .video-modal-close {
+        top: -40px;
+        width: 36px;
+        height: 36px;
+    }
+}
+
+/* Extra Small Screens */
+@media (max-width: 360px) {
+    :root {
+        --font-size-6xl: 1.75rem;
+        --font-size-5xl: 1.5rem;
+        --font-size-4xl: 1.25rem;
+    }
+
+    .container {
+        padding: 0 var(--spacing-sm);
+    }
+
+    .hero-badge {
+        font-size: var(--font-size-xs);
+        padding: 4px 10px;
     }
 
     .testimonial-card {
-        width: 300px;
+        width: 260px;
+    }
+
+    .nav-links {
+        padding: var(--spacing-md);
     }
 }
