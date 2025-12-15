@@ -1508,22 +1508,70 @@ button {
     }
 
     /* Footer Mobile */
+    .footer {
+        padding: var(--spacing-xl) 0 var(--spacing-md);
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-xl);
+        text-align: center;
+    }
+
+    .footer-brand {
+        max-width: 100%;
+        margin: 0 auto;
+    }
+
     .footer-brand-name {
         font-size: var(--font-size-xl);
     }
 
     .footer-description {
         font-size: var(--font-size-sm);
+        max-width: 300px;
+        margin: 0 auto var(--spacing-md);
+    }
+
+    .footer-logo {
+        height: 50px;
+        margin: 0 auto var(--spacing-sm);
+        display: block;
+    }
+
+    .social-links {
+        justify-content: center;
     }
 
     .social-link {
         width: 40px;
         height: 40px;
+        font-size: 0.9rem;
+    }
+
+    .footer-title {
+        font-size: var(--font-size-base);
+        margin-bottom: var(--spacing-md);
+    }
+
+    .footer-links {
+        align-items: center;
+    }
+
+    .footer-link {
+        font-size: var(--font-size-sm);
     }
 
     .footer-bottom {
+        flex-direction: column;
+        text-align: center;
         padding: var(--spacing-md) 0;
+        gap: var(--spacing-sm);
+    }
+
+    .footer-copyright {
         font-size: var(--font-size-xs);
+        order: 1;
     }
 
     /* Video Modal Mobile */
