@@ -222,6 +222,7 @@ async function loadDynamicContent() {
         // Load all content in parallel
         await Promise.all([
             loadMenu(),
+            loadServices(),
             loadCourses(),
             loadPortfolio(),
             loadTestimonials()
@@ -254,6 +255,75 @@ async function loadMenu() {
     } catch (error) {
         console.error('Error loading menu:', error);
         // Keep static menu on error
+    }
+}
+
+// ===== Load Services =====
+async function loadServices() {
+    const featuresGrid = document.getElementById('featuresGrid');
+    if (!featuresGrid) return;
+
+    try {
+        const { data: services, error } = await db.supabaseClient
+            .from('services')
+            .select('*')
+            .eq('is_active', true)
+            .order('sort_order', { ascending: true });
+
+        if (error) throw error;
+
+        if (services && services.length > 0) {
+            featuresGrid.innerHTML = services.map((service, index) => `
+                <div class="feature-card animate-card" style="animation-delay: ${index * 0.1}s">
+                    <div class="feature-icon">
+                        <i class="${service.icon || 'fas fa-cog'}"></i>
+                    </div>
+                    <h3 class="feature-title">${service.title}</h3>
+                    <p class="feature-description">
+                        ${service.description || ''}
+                    </p>
+                </div>
+            `).join('');
+        } else {
+            // Show default services if none in database
+            featuresGrid.innerHTML = `
+                <div class="feature-card animate-card" style="animation-delay: 0s">
+                    <div class="feature-icon"><i class="fas fa-robot"></i></div>
+                    <h3 class="feature-title">AI Creative Workflow</h3>
+                    <p class="feature-description">نستخدم أحدث تقنيات الذكاء الاصطناعي لتسريع عملية الإنتاج الإبداعي</p>
+                </div>
+                <div class="feature-card animate-card" style="animation-delay: 0.1s">
+                    <div class="feature-icon"><i class="fas fa-palette"></i></div>
+                    <h3 class="feature-title">التصميم الجرافيكي</h3>
+                    <p class="feature-description">تصاميم احترافية تعكس هويتك البصرية</p>
+                </div>
+                <div class="feature-card animate-card" style="animation-delay: 0.2s">
+                    <div class="feature-icon"><i class="fas fa-film"></i></div>
+                    <h3 class="feature-title">المونتاج الاحترافي</h3>
+                    <p class="feature-description">نحول لقطاتك إلى قصص مؤثرة</p>
+                </div>
+                <div class="feature-card animate-card" style="animation-delay: 0.3s">
+                    <div class="feature-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h3 class="feature-title">الكورسات التعليمية</h3>
+                    <p class="feature-description">تعلم أسرار الموشن جرافيك والتصميم</p>
+                </div>
+            `;
+        }
+    } catch (error) {
+        console.error('Error loading services:', error);
+        // Show default services on error
+        featuresGrid.innerHTML = `
+            <div class="feature-card animate-card">
+                <div class="feature-icon"><i class="fas fa-robot"></i></div>
+                <h3 class="feature-title">AI Creative Workflow</h3>
+                <p class="feature-description">نستخدم أحدث تقنيات الذكاء الاصطناعي لتسريع عملية الإنتاج الإبداعي</p>
+            </div>
+            <div class="feature-card animate-card">
+                <div class="feature-icon"><i class="fas fa-palette"></i></div>
+                <h3 class="feature-title">التصميم الجرافيكي</h3>
+                <p class="feature-description">تصاميم احترافية تعكس هويتك البصرية</p>
+            </div>
+        `;
     }
 }
 
