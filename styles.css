@@ -1136,16 +1136,14 @@ button {
 .footer {
     background: var(--bg-primary);
     border-top: 1px solid var(--border-color);
-    padding: var(--spacing-2xl) 0 var(--spacing-lg);
+    padding: var(--spacing-xl) 0;
 }
 
 .footer-content {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    text-align: center;
-    gap: var(--spacing-lg);
-    margin-bottom: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
 }
 
 .footer-brand {
@@ -1215,13 +1213,8 @@ button {
 }
 
 .footer-bottom {
-    border-top: 1px solid var(--border-color);
-    padding-top: var(--spacing-lg);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: var(--spacing-md);
+    text-align: center;
+    padding-top: var(--spacing-md);
 }
 
 .footer-copyright {
