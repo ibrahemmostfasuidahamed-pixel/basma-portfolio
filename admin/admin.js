@@ -18,6 +18,7 @@
 async function loadDashboard() {
     await Promise.all([
         loadMenu(),
+        loadServices(),
         loadCourses(),
         loadPortfolio(),
         loadTestimonials()
@@ -130,6 +131,124 @@ async function deleteMenuConfirm(id) {
             showToast('تم حذف الرابط', 'success');
             loadMenu();
         } catch (error) {
+            showToast('حدث خطأ أثناء الحذف', 'error');
+        }
+    }
+}
+
+// ===== Services =====
+let servicesData = [];
+
+async function loadServices() {
+    try {
+        const { data, error } = await db.supabaseClient
+            .from('services')
+            .select('*')
+            .order('sort_order', { ascending: true });
+
+        if (error) throw error;
+        servicesData = data || [];
+        renderServicesTable();
+
+        document.getElementById('servicesLoading').style.display = 'none';
+        document.getElementById('servicesTable').style.display = 'table';
+    } catch (error) {
+        console.error('Error loading services:', error);
+        document.getElementById('servicesLoading').innerHTML = '<p style="color: var(--text-secondary);">لا توجد خدمات</p>';
+    }
+}
+
+function renderServicesTable() {
+    const tbody = document.getElementById('servicesTableBody');
+    tbody.innerHTML = servicesData.map(service => `
+        <tr>
+            <td><i class="${service.icon || 'fas fa-cog'}" style="font-size: 1.5rem; color: var(--accent-orange);"></i></td>
+            <td>${service.title}</td>
+            <td style="max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${service.description || ''}</td>
+            <td><span class="badge ${service.is_active ? 'badge-success' : 'badge-secondary'}">${service.is_active ? 'نشط' : 'غير نشط'}</span></td>
+            <td>
+                <button class="btn-icon" onclick="editService('${service.id}')" title="تعديل">
+                    <i class="fas fa-edit"></i>
+                </button>
+                <button class="btn-icon danger" onclick="deleteServiceConfirm('${service.id}')" title="حذف">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </td>
+        </tr>
+    `).join('');
+}
+
+function openServiceModal() {
+    document.getElementById('serviceModalTitle').textContent = 'إضافة خدمة جديدة';
+    document.getElementById('serviceForm').reset();
+    document.getElementById('serviceId').value = '';
+    document.getElementById('serviceIcon').value = 'fas fa-video';
+    document.getElementById('serviceOrder').value = servicesData.length + 1;
+    document.getElementById('servicesModal').classList.add('active');
+}
+
+function editService(id) {
+    const service = servicesData.find(s => s.id === id);
+    if (!service) return;
+
+    document.getElementById('serviceModalTitle').textContent = 'تعديل الخدمة';
+    document.getElementById('serviceId').value = service.id;
+    document.getElementById('serviceTitle').value = service.title;
+    document.getElementById('serviceDescription').value = service.description || '';
+    document.getElementById('serviceIcon').value = service.icon || 'fas fa-video';
+    document.getElementById('serviceOrder').value = service.sort_order || 1;
+    document.getElementById('serviceActive').value = service.is_active ? 'true' : 'false';
+    document.getElementById('servicesModal').classList.add('active');
+}
+
+document.getElementById('serviceForm')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const id = document.getElementById('serviceId').value;
+    const serviceData = {
+        title: document.getElementById('serviceTitle').value,
+        description: document.getElementById('serviceDescription').value,
+        icon: document.getElementById('serviceIcon').value,
+        sort_order: parseInt(document.getElementById('serviceOrder').value) || 1,
+        is_active: document.getElementById('serviceActive').value === 'true'
+    };
+
+    try {
+        if (id) {
+            const { error } = await db.supabaseClient
+                .from('services')
+                .update(serviceData)
+                .eq('id', id);
+            if (error) throw error;
+            showToast('تم تحديث الخدمة بنجاح');
+        } else {
+            const { error } = await db.supabaseClient
+                .from('services')
+                .insert([serviceData]);
+            if (error) throw error;
+            showToast('تم إضافة الخدمة بنجاح');
+        }
+
+        closeModal('servicesModal');
+        loadServices();
+    } catch (error) {
+        console.error('Error saving service:', error);
+        showToast('حدث خطأ أثناء الحفظ', 'error');
+    }
+});
+
+async function deleteServiceConfirm(id) {
+    if (confirm('هل أنت متأكد من حذف هذه الخدمة؟')) {
+        try {
+            const { error } = await db.supabaseClient
+                .from('services')
+                .delete()
+                .eq('id', id);
+            if (error) throw error;
+            showToast('تم حذف الخدمة بنجاح');
+            loadServices();
+        } catch (error) {
+            console.error('Error deleting service:', error);
             showToast('حدث خطأ أثناء الحذف', 'error');
         }
     }
