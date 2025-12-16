@@ -214,6 +214,9 @@ function editService(id) {
         document.getElementById('servicePlaceholder').style.display = 'flex';
     }
 
+    // Handle video URL
+    document.getElementById('serviceVideo').value = service.video_url || '';
+
     document.getElementById('servicesModal').classList.add('active');
 }
 
@@ -226,6 +229,7 @@ document.getElementById('serviceForm')?.addEventListener('submit', async (e) => 
         description: document.getElementById('serviceDescription').value,
         icon: document.getElementById('serviceIcon').value,
         image_url: document.getElementById('serviceImage').value || null,
+        video_url: document.getElementById('serviceVideo').value || null,
         sort_order: parseInt(document.getElementById('serviceOrder').value) || 1,
         is_active: document.getElementById('serviceActive').value === 'true'
     };

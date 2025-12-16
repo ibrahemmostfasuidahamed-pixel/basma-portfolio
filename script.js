@@ -276,32 +276,18 @@ async function loadServices() {
             // Store services globally for modal access
             window.servicesData = services;
 
-            featuresGrid.innerHTML = services.map((service, index) => {
-                const truncatedDesc = service.description && service.description.length > 80
-                    ? service.description.substring(0, 80) + '...'
-                    : service.description || '';
-
-                return `
-                <div class="feature-card animate-card" style="animation-delay: ${index * 0.1}s">
-                    ${service.image_url ? `
-                        <div class="feature-image">
-                            <img src="${service.image_url}" alt="${service.title}">
-                        </div>
-                    ` : `
-                        <div class="feature-icon">
-                            <i class="${service.icon || 'fas fa-cog'}"></i>
-                        </div>
-                    `}
+            featuresGrid.innerHTML = services.map((service, index) => `
+                <div class="feature-card animate-card" style="animation-delay: ${index * 0.1}s" onclick="openServiceDetails('${service.id}')">
+                    <div class="feature-icon">
+                        <i class="${service.icon || 'fas fa-cog'}"></i>
+                    </div>
                     <h3 class="feature-title">${service.title}</h3>
-                    <p class="feature-description">${truncatedDesc}</p>
-                    ${service.description && service.description.length > 80 ? `
-                        <button class="btn-details" onclick="openServiceDetails('${service.id}')">
-                            <i class="fas fa-arrow-left"></i>
-                            تفاصيل أكثر
-                        </button>
-                    ` : ''}
+                    <button class="btn-details">
+                        <i class="fas fa-arrow-left"></i>
+                        تفاصيل أكثر
+                    </button>
                 </div>
-            `}).join('');
+            `).join('');
         } else {
             // Show default services if none in database
             featuresGrid.innerHTML = `
@@ -385,6 +371,15 @@ function openServiceDetails(serviceId) {
                 </div>
                 <h2 class="service-modal-title">${service.title}</h2>
                 <p class="service-modal-description">${service.description || ''}</p>
+                ${service.video_url ? `
+                    <div class="service-modal-video">
+                        <iframe src="${convertToEmbedUrl(service.video_url)}" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                ` : ''}
             </div>
         </div>
     `;
