@@ -289,31 +289,44 @@ button {
 .nav-links {
     display: flex;
     align-items: center;
-    gap: var(--spacing-sm);
-    padding: 8px;
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
+    gap: var(--spacing-xs);
+    padding: 6px;
+    background: rgba(26, 42, 69, 0.8);
+    border: 1px solid rgba(99, 102, 241, 0.2);
     border-radius: var(--radius-full);
+    backdrop-filter: blur(10px);
 }
 
 .nav-link {
-    padding: 10px 20px;
+    padding: 12px 24px;
     font-size: var(--font-size-sm);
     font-weight: 500;
     color: var(--text-secondary);
     border-radius: var(--radius-full);
-    transition: var(--transition-fast);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
 }
 
-.nav-link:hover,
+.nav-link:hover {
+    color: var(--text-primary);
+}
+
 .nav-link.active {
     color: var(--text-primary);
-    background: var(--bg-card-hover);
+    background: var(--accent-orange);
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
 }
 
 .nav-link.btn-primary {
     color: var(--text-primary);
     background: var(--gradient-accent);
+    border: none;
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+}
+
+.nav-link.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.5);
 }
 
 .mobile-toggle {
