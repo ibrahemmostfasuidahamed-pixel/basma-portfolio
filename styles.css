@@ -313,8 +313,19 @@ button {
 
 .nav-link.active {
     color: var(--text-primary);
+    background: transparent;
+}
+
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 3px;
     background: var(--accent-orange);
-    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+    border-radius: 2px;
 }
 
 .nav-link.btn-primary {
