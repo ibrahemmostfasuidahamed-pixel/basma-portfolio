@@ -277,15 +277,24 @@ async function loadServices() {
             window.servicesData = services;
 
             featuresGrid.innerHTML = services.map((service, index) => `
-                <div class="feature-card animate-card" style="animation-delay: ${index * 0.1}s" onclick="openServiceDetails('${service.id}')">
-                    <div class="feature-icon">
-                        <i class="${service.icon || 'fas fa-cog'}"></i>
+                <div class="feature-card animate-card ${service.image_url ? 'has-cover' : ''}" style="animation-delay: ${index * 0.1}s" onclick="openServiceDetails('${service.id}')">
+                    ${service.image_url ? `
+                        <div class="feature-cover">
+                            <img src="${service.image_url}" alt="${service.title}">
+                            <div class="feature-cover-overlay"></div>
+                        </div>
+                    ` : `
+                        <div class="feature-icon">
+                            <i class="${service.icon || 'fas fa-cog'}"></i>
+                        </div>
+                    `}
+                    <div class="feature-content">
+                        <h3 class="feature-title">${service.title}</h3>
+                        <button class="btn-details">
+                            <i class="fas fa-arrow-left"></i>
+                            تفاصيل أكثر
+                        </button>
                     </div>
-                    <h3 class="feature-title">${service.title}</h3>
-                    <button class="btn-details">
-                        <i class="fas fa-arrow-left"></i>
-                        تفاصيل أكثر
-                    </button>
                 </div>
             `).join('');
         } else {
