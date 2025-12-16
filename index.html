@@ -118,41 +118,52 @@
         </nav>
     </header>
 
-    <!-- ===== Hero Section ===== -->
-    <section class="hero section" id="home">
-        <!-- Video Background -->
-        <div class="hero-video-container">
-            <video autoplay muted loop playsinline class="hero-video">
-                <source src="VIDEO.mp4" type="video/mp4">
-            </video>
-            <div class="hero-video-overlay"></div>
+    <!-- ===== Hero Section - New Design ===== -->
+    <section class="hero-new section" id="home">
+        <div class="container">
+            <div class="hero-grid">
+                <!-- Left Side - Text Content -->
+                <div class="hero-text-content">
+                    <h1 class="hero-main-title">
+                        اصنع بصمتك
+                        <span class="hero-title-highlight">في المستقبل</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        منصة تعليمية متقدمة للبث المباشر. ابدأ رحلتك التعليمية اليوم.
+                    </p>
+                    <a href="#courses" class="btn-cta-new">
+                        <span>ابدأ التعلم الآن</span>
+                        <i class="fas fa-chevron-left"></i>
+                    </a>
+                </div>
+
+                <!-- Right Side - Video Card -->
+                <div class="hero-video-card">
+                    <div class="video-card-inner">
+                        <div class="live-badge">
+                            <span class="live-dot"></span>
+                            LIVE
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&q=80" alt="مدربة"
+                            class="video-card-image">
+                        <div class="video-card-overlay"></div>
+                        <div class="video-card-info">
+                            <span class="video-card-badge">مباشر الآن:</span>
+                            <span class="video-card-title">أساسيات الرسوم المتحركة المتقدمة</span>
+                        </div>
+                    </div>
+                    <!-- Decorations -->
+                    <div class="video-decoration deco-1">👍</div>
+                    <div class="video-decoration deco-2">😊</div>
+                    <div class="video-decoration deco-3">❤️</div>
+                    <div class="video-decoration deco-4">🎨</div>
+                </div>
+            </div>
         </div>
-
-        <div class="hero-content">
-            <div class="hero-badge">
-                <span class="dot"></span>
-                <span>نصنع الإبداع من قلب أفريقيا</span>
-            </div>
-
-            <h1 class="hero-title">
-                حوّل أفكارك إلى <span class="highlight">محتوى إبداعي</span> مذهل
-            </h1>
-
-            <p class="hero-description">
-                ندمج الذكاء الاصطناعي مع الفن لنقدم لك تجربة بصرية لا تُنسى. من الموشن جرافيك للتصميم والمونتاج - نحن
-                شريكك الإبداعي.
-            </p>
-
-            <div class="hero-buttons">
-                <a href="#contact" class="btn btn-primary">
-                    <i class="fas fa-rocket"></i>
-                    ابدأ مشروعك
-                </a>
-                <a href="#portfolio" class="btn btn-outline">
-                    <i class="fas fa-play"></i>
-                    شاهد أعمالنا
-                </a>
-            </div>
+        <!-- Background Decorations -->
+        <div class="hero-bg-circles">
+            <div class="hero-circle circle-1"></div>
+            <div class="hero-circle circle-2"></div>
         </div>
     </section>
 
@@ -178,6 +189,106 @@
                     style="grid-column: span 4; padding: 40px; text-align: center; color: rgba(255,255,255,0.5);">
                     <i class="fas fa-spinner fa-spin fa-2x"></i>
                     <p style="margin-top: 16px;">جاري تحميل الخدمات...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Live Sessions Section ===== -->
+    <section class="live-sessions section" id="live">
+        <div class="container">
+            <div class="section-header-right">
+                <h2 class="section-title-new">الجلسات المباشرة القادمة</h2>
+            </div>
+            <div class="sessions-grid">
+                <!-- Session 1 -->
+                <div class="session-card live-now">
+                    <div class="session-badge-live">
+                        <span class="live-dot"></span>
+                        مباشر الآن
+                    </div>
+                    <div class="session-content">
+                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=100&q=80" alt="session"
+                            class="session-image">
+                        <div class="session-info">
+                            <h3 class="session-title">التصميم الجرافيكي التفاعلي</h3>
+                            <p class="session-time">
+                                <i class="far fa-clock"></i>
+                                12:00 صباحاً
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Session 2 -->
+                <div class="session-card">
+                    <div class="session-content">
+                        <img src="https://images.unsplash.com/photo-1593720213428-28a5b9e94613?w=100&q=80" alt="session"
+                            class="session-image">
+                        <div class="session-info">
+                            <h3 class="session-title">برمجة الويب للمبتدئين</h3>
+                            <p class="session-time">
+                                <i class="far fa-clock"></i>
+                                12:00 صباحاً
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Session 3 -->
+                <div class="session-card">
+                    <div class="session-content">
+                        <img src="https://images.unsplash.com/photo-1542744094-3a31f272c490?w=100&q=80" alt="session"
+                            class="session-image">
+                        <div class="session-info">
+                            <h3 class="session-title">تصوير فوتوغرافي متقدم</h3>
+                            <p class="session-time">
+                                <i class="far fa-clock"></i>
+                                11:00 صباحاً
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Students & Trainers Section ===== -->
+    <section class="promo-section section">
+        <div class="container">
+            <div class="promo-grid">
+                <!-- Students Card -->
+                <div class="promo-card students-card">
+                    <div class="promo-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=300&q=80" alt="طلاب"
+                            class="promo-image">
+                    </div>
+                    <div class="promo-content">
+                        <div class="promo-icon">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <h3 class="promo-title">طلاب</h3>
+                        <p class="promo-description">
+                            عزز مهاراتك، تفاعل مع المدربين، وحقق أهدافك الأكاديمية.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Trainers Card -->
+                <div class="promo-card trainers-card">
+                    <div class="promo-content">
+                        <div class="promo-icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <h3 class="promo-title">متدربون</h3>
+                        <p class="promo-description">
+                            طور قدراتك المهنية، احصل على شهادات معتمدة، واستعد لسوق العمل.
+                        </p>
+                    </div>
+                    <div class="promo-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=300&q=80" alt="متدربون"
+                            class="promo-image">
+                    </div>
                 </div>
             </div>
         </div>

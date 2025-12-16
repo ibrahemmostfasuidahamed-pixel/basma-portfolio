@@ -6,12 +6,12 @@
 
 /* ===== CSS Variables ===== */
 :root {
-    /* Dark Theme Colors */
-    --bg-primary: #0a0a0f;
-    --bg-secondary: #12121a;
-    --bg-tertiary: #1a1a24;
-    --bg-card: rgba(255, 255, 255, 0.03);
-    --bg-card-hover: rgba(255, 255, 255, 0.06);
+    /* Dark Blue Theme Colors - New Design */
+    --bg-primary: #0a1628;
+    --bg-secondary: #101d32;
+    --bg-tertiary: #1a2a45;
+    --bg-card: rgba(26, 42, 69, 0.6);
+    --bg-card-hover: rgba(26, 42, 69, 0.9);
 
     /* Accent Colors */
     --accent-primary: #6366f1;
@@ -26,13 +26,16 @@
     /* Teal */
     --accent-pink: #ec4899;
     /* Pink */
+    --accent-blue: #3b82f6;
+    /* Blue */
 
     /* Gradients */
     --gradient-primary: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
     --gradient-accent: linear-gradient(135deg, var(--accent-orange) 0%, #ff8c5a 100%);
     --gradient-glow: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-pink) 50%, var(--accent-orange) 100%);
-    --gradient-dark: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
-    --gradient-card: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+    --gradient-dark: linear-gradient(180deg, #0a1628 0%, #101d32 50%, #1a2a45 100%);
+    --gradient-card: linear-gradient(145deg, rgba(59, 130, 246, 0.15) 0%, rgba(99, 102, 241, 0.05) 100%);
+    --gradient-hero: linear-gradient(135deg, #0a1628 0%, #152238 50%, #1a3050 100%);
 
     /* Text Colors */
     --text-primary: #ffffff;
@@ -331,7 +334,224 @@ button {
     transition: var(--transition-fast);
 }
 
-/* ===== Hero Section ===== */
+/* ===== New Hero Section ===== */
+.hero-new {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: var(--gradient-hero);
+    position: relative;
+    overflow: hidden;
+    padding: 120px 0 80px;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-2xl);
+    align-items: center;
+}
+
+.hero-text-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-main-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    line-height: 1.2;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-lg);
+}
+
+.hero-title-highlight {
+    display: block;
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-subtitle {
+    font-size: var(--font-size-lg);
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: var(--spacing-xl);
+    max-width: 450px;
+}
+
+.btn-cta-new {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: 16px 32px;
+    background: var(--accent-orange);
+    color: white;
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+}
+
+.btn-cta-new:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(255, 107, 53, 0.4);
+}
+
+/* Hero Video Card */
+.hero-video-card {
+    position: relative;
+    z-index: 2;
+}
+
+.video-card-inner {
+    position: relative;
+    border-radius: var(--radius-2xl);
+    overflow: hidden;
+    border: 3px solid rgba(99, 102, 241, 0.5);
+    box-shadow: 0 25px 80px rgba(99, 102, 241, 0.3),
+        0 0 100px rgba(99, 102, 241, 0.15);
+    background: var(--bg-card);
+}
+
+.video-card-image {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+}
+
+.video-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(10, 22, 40, 0.9) 0%, transparent 60%);
+}
+
+.live-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: #ef4444;
+    color: white;
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+    border-radius: var(--radius-full);
+    z-index: 10;
+}
+
+.live-dot {
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+}
+
+.video-card-info {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    z-index: 10;
+}
+
+.video-card-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-sm);
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 8px;
+}
+
+.video-card-title {
+    display: block;
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: white;
+}
+
+/* Emoji Decorations */
+.video-decoration {
+    position: absolute;
+    font-size: 2rem;
+    animation: float 3s ease-in-out infinite;
+    z-index: 5;
+}
+
+.deco-1 {
+    top: -20px;
+    right: 50px;
+    animation-delay: 0s;
+}
+
+.deco-2 {
+    top: 30%;
+    right: -30px;
+    animation-delay: 0.5s;
+}
+
+.deco-3 {
+    bottom: 20%;
+    left: -30px;
+    animation-delay: 1s;
+}
+
+.deco-4 {
+    top: 20%;
+    left: -20px;
+    animation-delay: 1.5s;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+/* Background Circles */
+.hero-bg-circles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.hero-circle {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 107, 53, 0.2);
+}
+
+.circle-1 {
+    width: 400px;
+    height: 400px;
+    bottom: -100px;
+    left: -100px;
+}
+
+.circle-2 {
+    width: 300px;
+    height: 300px;
+    bottom: -50px;
+    left: -50px;
+    border-color: rgba(255, 107, 53, 0.1);
+}
+
+/* ===== Old Hero Section (keeping for fallback) ===== */
 .hero {
     min-height: 100vh;
     display: flex;
@@ -644,6 +864,169 @@ button {
     font-size: var(--font-size-sm);
     color: var(--text-secondary);
     line-height: 1.7;
+}
+
+/* ===== Live Sessions Section ===== */
+.live-sessions {
+    background: var(--bg-secondary);
+    padding: var(--spacing-2xl) 0;
+}
+
+.section-header-right {
+    text-align: right;
+    margin-bottom: var(--spacing-xl);
+}
+
+.section-title-new {
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.sessions-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-lg);
+}
+
+.session-card {
+    position: relative;
+    background: var(--gradient-card);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-md);
+    transition: all 0.3s ease;
+}
+
+.session-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(99, 102, 241, 0.5);
+    box-shadow: 0 15px 40px rgba(99, 102, 241, 0.2);
+}
+
+.session-card.live-now {
+    border-color: rgba(239, 68, 68, 0.5);
+}
+
+.session-badge-live {
+    position: absolute;
+    top: -12px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: #ef4444;
+    color: white;
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    border-radius: var(--radius-full);
+}
+
+.session-content {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.session-image {
+    width: 60px;
+    height: 60px;
+    border-radius: var(--radius-lg);
+    object-fit: cover;
+}
+
+.session-info {
+    flex: 1;
+}
+
+.session-title {
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.session-time {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* ===== Promo Section (Students & Trainers) ===== */
+.promo-section {
+    background: var(--bg-primary);
+    padding: var(--spacing-2xl) 0;
+}
+
+.promo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-xl);
+}
+
+.promo-card {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(99, 102, 241, 0.08) 100%);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    border-radius: var(--radius-2xl);
+    padding: var(--spacing-lg);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.promo-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 50px rgba(99, 102, 241, 0.2);
+}
+
+.promo-image-wrapper {
+    flex: 0 0 150px;
+    height: 150px;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+}
+
+.promo-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.promo-content {
+    flex: 1;
+    padding: var(--spacing-md);
+    text-align: right;
+}
+
+.promo-icon {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gradient-accent);
+    border-radius: 50%;
+    font-size: 1.25rem;
+    color: white;
+    margin-bottom: var(--spacing-sm);
+    margin-right: auto;
+}
+
+.promo-title {
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.promo-description {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    line-height: 1.6;
 }
 
 /* Feature Card Image */
