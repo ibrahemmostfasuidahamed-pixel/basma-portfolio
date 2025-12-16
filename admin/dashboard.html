@@ -316,6 +316,26 @@
                             </select>
                         </div>
                     </div>
+                    <div class="form-row">
+                        <div class="form-group full-width">
+                            <label>صورة الخدمة</label>
+                            <div class="upload-area" id="serviceUploadArea">
+                                <input type="file" id="serviceImageFile" accept="image/*" style="display: none;">
+                                <input type="hidden" id="serviceImage">
+                                <div class="upload-preview" id="servicePreview" style="display: none;">
+                                    <img id="servicePreviewImg" src="" alt="Preview">
+                                    <button type="button" class="upload-remove" onclick="removeServiceImage()">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <div class="upload-placeholder" id="servicePlaceholder">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <span>اسحب الصورة أو اضغط للاختيار</span>
+                                    <small style="color: var(--text-secondary);">الأبعاد المثالية: 400×300 بكسل</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" onclick="closeModal('servicesModal')">إلغاء</button>

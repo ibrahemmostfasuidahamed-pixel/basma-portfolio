@@ -184,6 +184,9 @@ function openServiceModal() {
     document.getElementById('serviceId').value = '';
     document.getElementById('serviceIcon').value = 'fas fa-video';
     document.getElementById('serviceOrder').value = servicesData.length + 1;
+    document.getElementById('serviceImage').value = '';
+    document.getElementById('servicePreview').style.display = 'none';
+    document.getElementById('servicePlaceholder').style.display = 'flex';
     document.getElementById('servicesModal').classList.add('active');
 }
 
@@ -198,6 +201,19 @@ function editService(id) {
     document.getElementById('serviceIcon').value = service.icon || 'fas fa-video';
     document.getElementById('serviceOrder').value = service.sort_order || 1;
     document.getElementById('serviceActive').value = service.is_active ? 'true' : 'false';
+
+    // Handle image preview
+    if (service.image_url) {
+        document.getElementById('serviceImage').value = service.image_url;
+        document.getElementById('servicePreviewImg').src = service.image_url;
+        document.getElementById('servicePreview').style.display = 'block';
+        document.getElementById('servicePlaceholder').style.display = 'none';
+    } else {
+        document.getElementById('serviceImage').value = '';
+        document.getElementById('servicePreview').style.display = 'none';
+        document.getElementById('servicePlaceholder').style.display = 'flex';
+    }
+
     document.getElementById('servicesModal').classList.add('active');
 }
 
@@ -209,6 +225,7 @@ document.getElementById('serviceForm')?.addEventListener('submit', async (e) => 
         title: document.getElementById('serviceTitle').value,
         description: document.getElementById('serviceDescription').value,
         icon: document.getElementById('serviceIcon').value,
+        image_url: document.getElementById('serviceImage').value || null,
         sort_order: parseInt(document.getElementById('serviceOrder').value) || 1,
         is_active: document.getElementById('serviceActive').value === 'true'
     };
@@ -747,6 +764,9 @@ function handleImageSelect(file, type) {
     } else if (type === 'portfolio') {
         portfolioImageFile = file;
         showImagePreview(file, 'portfolioPreviewImg', 'portfolioPreview', 'portfolioPlaceholder');
+    } else if (type === 'service') {
+        serviceImageFile = file;
+        showImagePreview(file, 'servicePreviewImg', 'servicePreview', 'servicePlaceholder');
     }
 }
 
@@ -812,7 +832,31 @@ function setupDragDrop(areaId, type) {
 setTimeout(() => {
     setupDragDrop('courseUploadArea', 'course');
     setupDragDrop('portfolioUploadArea', 'portfolio');
+    setupDragDrop('serviceUploadArea', 'service');
+
+    // Service image upload click handler
+    const serviceUploadArea = document.getElementById('serviceUploadArea');
+    if (serviceUploadArea) {
+        serviceUploadArea.addEventListener('click', () => {
+            document.getElementById('serviceImageFile').click();
+        });
+    }
 }, 100);
+
+// Service Image Upload Handler
+let serviceImageFile = null;
+
+document.getElementById('serviceImageFile')?.addEventListener('change', function (e) {
+    handleImageSelect(e.target.files[0], 'service');
+});
+
+function removeServiceImage() {
+    serviceImageFile = null;
+    document.getElementById('serviceImage').value = '';
+    document.getElementById('servicePreview').style.display = 'none';
+    document.getElementById('servicePlaceholder').style.display = 'flex';
+    document.getElementById('serviceImageFile').value = '';
+}
 
 // Upload image and return URL
 async function uploadAndGetUrl(file, folder) {

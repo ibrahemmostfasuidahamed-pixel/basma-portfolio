@@ -273,17 +273,35 @@ async function loadServices() {
         if (error) throw error;
 
         if (services && services.length > 0) {
-            featuresGrid.innerHTML = services.map((service, index) => `
+            // Store services globally for modal access
+            window.servicesData = services;
+
+            featuresGrid.innerHTML = services.map((service, index) => {
+                const truncatedDesc = service.description && service.description.length > 80
+                    ? service.description.substring(0, 80) + '...'
+                    : service.description || '';
+
+                return `
                 <div class="feature-card animate-card" style="animation-delay: ${index * 0.1}s">
-                    <div class="feature-icon">
-                        <i class="${service.icon || 'fas fa-cog'}"></i>
-                    </div>
+                    ${service.image_url ? `
+                        <div class="feature-image">
+                            <img src="${service.image_url}" alt="${service.title}">
+                        </div>
+                    ` : `
+                        <div class="feature-icon">
+                            <i class="${service.icon || 'fas fa-cog'}"></i>
+                        </div>
+                    `}
                     <h3 class="feature-title">${service.title}</h3>
-                    <p class="feature-description">
-                        ${service.description || ''}
-                    </p>
+                    <p class="feature-description">${truncatedDesc}</p>
+                    ${service.description && service.description.length > 80 ? `
+                        <button class="btn-details" onclick="openServiceDetails('${service.id}')">
+                            <i class="fas fa-arrow-left"></i>
+                            تفاصيل أكثر
+                        </button>
+                    ` : ''}
                 </div>
-            `).join('');
+            `}).join('');
         } else {
             // Show default services if none in database
             featuresGrid.innerHTML = `
@@ -326,6 +344,63 @@ async function loadServices() {
         `;
     }
 }
+
+// ===== Open Service Details Modal =====
+function openServiceDetails(serviceId) {
+    const service = window.servicesData?.find(s => s.id === serviceId);
+    if (!service) return;
+
+    // Create or get modal
+    let modal = document.getElementById('serviceDetailModal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'serviceDetailModal';
+        modal.className = 'service-modal-overlay';
+        document.body.appendChild(modal);
+
+        // Close on click outside
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeServiceModal();
+        });
+
+        // Close on Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeServiceModal();
+        });
+    }
+
+    modal.innerHTML = `
+        <div class="service-modal">
+            <button class="service-modal-close" onclick="closeServiceModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            ${service.image_url ? `
+                <div class="service-modal-image">
+                    <img src="${service.image_url}" alt="${service.title}">
+                </div>
+            ` : ''}
+            <div class="service-modal-content">
+                <div class="service-modal-icon">
+                    <i class="${service.icon || 'fas fa-cog'}"></i>
+                </div>
+                <h2 class="service-modal-title">${service.title}</h2>
+                <p class="service-modal-description">${service.description || ''}</p>
+            </div>
+        </div>
+    `;
+
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeServiceModal() {
+    const modal = document.getElementById('serviceDetailModal');
+    if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}
+
 
 // ===== Load Courses =====
 async function loadCourses() {
