@@ -261,6 +261,80 @@ button {
     color: var(--accent-orange);
 }
 
+/* ===== Simple Header Design (Matching Reference) ===== */
+.header-simple {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: #1a2a45;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-simple {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--spacing-md);
+    padding: 0;
+    height: 60px;
+}
+
+.nav-links-simple {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.nav-link-simple {
+    display: block;
+    padding: 20px 25px;
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-bottom: 3px solid transparent;
+}
+
+.nav-link-simple:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-link-simple.active {
+    color: white;
+    background: var(--accent-orange);
+    border-bottom: 3px solid transparent;
+}
+
+/* CTA Outline Button */
+.nav-cta-outline {
+    padding: 10px 24px;
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--accent-orange);
+    background: transparent;
+    border: 2px solid var(--accent-orange);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    margin-left: auto;
+}
+
+.nav-cta-outline:hover {
+    background: var(--accent-orange);
+    color: white;
+}
+
+.header-simple .mobile-toggle {
+    display: none;
+}
+
 /* ===== New Header Design ===== */
 .header-new {
     position: fixed;
