@@ -1172,22 +1172,26 @@ button {
 .cofounder-badge {
     display: inline-flex;
     align-items: center;
-    gap: 16px;
-    padding: 20px 55px;
-    background: linear-gradient(135deg, var(--accent-orange), #ff9a3c);
+    gap: 12px;
+    padding: 16px 40px;
+    background: rgba(255, 107, 53, 0.15);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 107, 53, 0.4);
     border-radius: 50px;
     color: white;
-    font-size: 2rem;
-    font-weight: 800;
+    font-size: 1.3rem;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 4px;
-    margin-bottom: 40px;
-    box-shadow: 0 25px 60px rgba(255, 107, 53, 0.6);
+    letter-spacing: 3px;
+    margin-bottom: 30px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
     animation: floatBadge 3s ease-in-out infinite;
 }
 
 .cofounder-badge i {
-    font-size: 1.4rem;
+    font-size: 1.1rem;
+    color: var(--accent-orange);
 }
 
 @keyframes floatBadge {
@@ -1198,13 +1202,13 @@ button {
     }
 
     50% {
-        transform: translateY(-10px);
+        transform: translateY(-8px);
     }
 }
 
 .profile-image-wrapper {
-    width: 550px;
-    height: 550px;
+    width: 400px;
+    height: 400px;
     border-radius: 50%;
     position: relative;
     margin: 0 auto;
