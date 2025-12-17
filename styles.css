@@ -1114,6 +1114,17 @@ button {
     margin-bottom: var(--spacing-2xl);
 }
 
+.section-header-center {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.section-header-center .section-title-new {
+    font-size: var(--font-size-3xl);
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
 .features-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
