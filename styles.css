@@ -3490,34 +3490,39 @@ button {
         padding: 0 16px;
     }
 
-    /* Header */
+    /* Header Mobile */
     .header-premium {
-        padding: 12px 0;
+        height: 70px;
+        padding: 0;
     }
 
     .nav-premium {
         padding: 0 16px;
     }
 
+    .logo-premium img {
+        height: 55px;
+    }
+
     .nav-menu-premium {
         display: none;
     }
 
-    .nav-right-premium {
+    .search-premium {
+        display: none !important;
+    }
+
+    .nav-actions-premium {
         gap: 10px;
     }
 
-    .nav-search-premium {
-        display: none;
+    .cta-premium {
+        padding: 10px 16px;
+        font-size: 0.8rem;
     }
 
-    .nav-cta-premium {
-        padding: 10px 20px;
-        font-size: 0.85rem;
-    }
-
-    .logo-premium img {
-        height: 50px;
+    .header-premium .mobile-toggle {
+        display: flex;
     }
 
     /* Hero Section */
