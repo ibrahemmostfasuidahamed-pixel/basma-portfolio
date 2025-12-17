@@ -3447,3 +3447,229 @@ button {
         scroll-snap-align: start;
     }
 }
+
+/* ========================================
+   COMPREHENSIVE MOBILE RESPONSIVE STYLES
+   ======================================== */
+
+/* Tablet Styles */
+@media (max-width: 992px) {
+    .hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 40px;
+    }
+
+    .hero-text-content {
+        order: 2;
+    }
+
+    .hero-profile-card {
+        order: 1;
+    }
+
+    .profile-image-wrapper {
+        width: 320px;
+        height: 320px;
+    }
+
+    .hero-main-title {
+        font-size: 2.5rem;
+    }
+
+    .services-grid-animated {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+
+    /* Container */
+    .container {
+        padding: 0 16px;
+    }
+
+    /* Header */
+    .header-premium {
+        padding: 12px 0;
+    }
+
+    .nav-premium {
+        padding: 0 16px;
+    }
+
+    .nav-menu-premium {
+        display: none;
+    }
+
+    .nav-right-premium {
+        gap: 10px;
+    }
+
+    .nav-search-premium {
+        display: none;
+    }
+
+    .nav-cta-premium {
+        padding: 10px 20px;
+        font-size: 0.85rem;
+    }
+
+    .logo-premium img {
+        height: 50px;
+    }
+
+    /* Hero Section */
+    .hero-new {
+        padding: 100px 0 60px;
+    }
+
+    .hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 30px;
+    }
+
+    .hero-main-title {
+        font-size: 1.8rem;
+        line-height: 1.3;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+        padding: 0 10px;
+    }
+
+    .btn-cta-new {
+        padding: 14px 28px;
+        font-size: 1rem;
+    }
+
+    /* Cofounder Profile */
+    .profile-image-wrapper {
+        width: 250px;
+        height: 250px;
+    }
+
+    .cofounder-badge {
+        padding: 12px 28px;
+        font-size: 1rem;
+        letter-spacing: 2px;
+        margin-bottom: 20px;
+    }
+
+    .cofounder-badge i {
+        font-size: 0.9rem;
+    }
+
+    /* Services Section */
+    .services-section {
+        padding: 60px 0;
+    }
+
+    .section-title-animated {
+        font-size: 1.8rem;
+    }
+
+    .services-grid-animated {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+
+    .service-card-animated {
+        padding: 24px;
+    }
+
+    .service-icon-animated {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+
+    .service-title {
+        font-size: 1rem;
+    }
+
+    /* Show More Button */
+    .btn-show-more {
+        padding: 12px 30px;
+        font-size: 1rem;
+    }
+
+    /* Section Headers */
+    .section-header-center {
+        margin-bottom: 30px;
+    }
+
+    .section-title {
+        font-size: 1.6rem;
+    }
+
+    .section-subtitle {
+        font-size: 0.95rem;
+    }
+
+    /* Insights Section */
+    .insights-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    /* Footer */
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        text-align: center;
+    }
+
+    .footer-social {
+        justify-content: center;
+    }
+}
+
+/* Small Mobile Styles */
+@media (max-width: 480px) {
+    .hero-main-title {
+        font-size: 1.5rem;
+    }
+
+    .hero-title-highlight {
+        display: block;
+    }
+
+    .profile-image-wrapper {
+        width: 200px;
+        height: 200px;
+    }
+
+    .cofounder-badge {
+        padding: 10px 24px;
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+    }
+
+    .section-title-animated {
+        font-size: 1.5rem;
+    }
+
+    .service-card-animated {
+        padding: 20px;
+    }
+
+    .service-icon-animated {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+
+    .btn-cta-new {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .btn-show-more {
+        width: 100%;
+        justify-content: center;
+    }
+}
