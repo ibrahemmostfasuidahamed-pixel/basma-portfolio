@@ -1185,30 +1185,24 @@ button {
     background: linear-gradient(to left, var(--bg-secondary), transparent);
 }
 
-.services-track-wrapper {
+.services-track {
     display: flex;
-    gap: var(--spacing-lg);
-    animation: marquee 20s linear infinite;
+    gap: 24px;
+    width: fit-content;
+    animation: marqueeScroll 25s linear infinite;
 }
 
-.services-track-wrapper:hover {
+.services-track:hover {
     animation-play-state: paused;
 }
 
-.services-track {
-    display: flex;
-    gap: var(--spacing-lg);
-    flex-shrink: 0;
-    padding-right: var(--spacing-lg);
-}
-
-@keyframes marquee {
-    0% {
+@keyframes marqueeScroll {
+    from {
         transform: translateX(0);
     }
 
-    100% {
-        transform: translateX(-50%);
+    to {
+        transform: translateX(calc(-50% - 12px));
     }
 }
 
