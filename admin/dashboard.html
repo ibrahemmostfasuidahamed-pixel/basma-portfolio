@@ -39,10 +39,6 @@
                     <i class="fas fa-folder-open"></i>
                     <span>الأعمال</span>
                 </a>
-                <a href="#testimonials-section" class="nav-item" onclick="showSection('testimonials')">
-                    <i class="fas fa-comments"></i>
-                    <span>الآراء</span>
-                </a>
             </nav>
 
             <div class="sidebar-footer">
@@ -83,16 +79,6 @@
                     </div>
                     <div class="stat-value" id="portfolioCount">0</div>
                     <div class="stat-label">الأعمال</div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-card-header">
-                        <div class="stat-icon blue">
-                            <i class="fas fa-comments"></i>
-                        </div>
-                    </div>
-                    <div class="stat-value" id="testimonialsCount">0</div>
-                    <div class="stat-label">آراء العملاء</div>
                 </div>
 
                 <div class="stat-card">
@@ -232,36 +218,6 @@
                 </div>
             </section>
 
-            <!-- Testimonials Section -->
-            <section id="testimonials-section" class="data-section" style="display: none;">
-                <div class="data-card">
-                    <div class="data-card-header">
-                        <h2 class="data-card-title">
-                            <i class="fas fa-comments"></i>
-                            إدارة آراء العملاء
-                        </h2>
-                        <button class="btn btn-primary" onclick="openTestimonialModal()">
-                            <i class="fas fa-plus"></i>
-                            إضافة رأي
-                        </button>
-                    </div>
-                    <div id="testimonialsLoading" class="loading">
-                        <div class="spinner"></div>
-                    </div>
-                    <table class="data-table" id="testimonialsTable" style="display: none;">
-                        <thead>
-                            <tr>
-                                <th>الاسم</th>
-                                <th>المنصب</th>
-                                <th>الرأي</th>
-                                <th>الحالة</th>
-                                <th>الإجراءات</th>
-                            </tr>
-                        </thead>
-                        <tbody id="testimonialsTableBody"></tbody>
-                    </table>
-                </div>
-            </section>
         </main>
     </div>
 
