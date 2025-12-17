@@ -1161,12 +1161,34 @@ button {
     overflow: hidden;
     width: 100%;
     margin-top: var(--spacing-xl);
+    position: relative;
+}
+
+.services-marquee::before,
+.services-marquee::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 80px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.services-marquee::before {
+    left: 0;
+    background: linear-gradient(to right, var(--bg-secondary), transparent);
+}
+
+.services-marquee::after {
+    right: 0;
+    background: linear-gradient(to left, var(--bg-secondary), transparent);
 }
 
 .services-track {
     display: flex;
     gap: var(--spacing-lg);
-    animation: marquee 30s linear infinite;
+    animation: marquee 20s linear infinite;
     width: max-content;
 }
 
