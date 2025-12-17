@@ -1187,18 +1187,19 @@ button {
 
 /* Animated Services Grid */
 .services-grid-animated {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--spacing-xl);
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 32px !important;
+    margin-top: 40px;
 }
 
 .service-card-animated {
     background: linear-gradient(145deg, rgba(59, 130, 246, 0.15) 0%, rgba(99, 102, 241, 0.08) 100%);
     border: 1px solid rgba(99, 102, 241, 0.3);
-    border-radius: var(--radius-2xl);
-    padding: var(--spacing-xl);
+    border-radius: 20px;
+    padding: 32px;
     text-align: center;
-    opacity: 0;
+    opacity: 1;
     animation: cardFadeIn 0.6s ease forwards;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
