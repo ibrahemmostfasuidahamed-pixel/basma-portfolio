@@ -1187,6 +1187,7 @@ button {
 
 .services-track-wrapper {
     display: flex;
+    gap: var(--spacing-lg);
     animation: marquee 20s linear infinite;
 }
 
@@ -1198,6 +1199,7 @@ button {
     display: flex;
     gap: var(--spacing-lg);
     flex-shrink: 0;
+    padding-right: var(--spacing-lg);
 }
 
 @keyframes marquee {
