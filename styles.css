@@ -1185,15 +1185,19 @@ button {
     background: linear-gradient(to left, var(--bg-secondary), transparent);
 }
 
+.services-track-wrapper {
+    display: flex;
+    animation: marquee 20s linear infinite;
+}
+
+.services-track-wrapper:hover {
+    animation-play-state: paused;
+}
+
 .services-track {
     display: flex;
     gap: var(--spacing-lg);
-    animation: marquee 20s linear infinite;
-    width: max-content;
-}
-
-.services-track:hover {
-    animation-play-state: paused;
+    flex-shrink: 0;
 }
 
 @keyframes marquee {
