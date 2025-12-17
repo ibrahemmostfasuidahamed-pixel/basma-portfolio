@@ -1467,6 +1467,39 @@ button {
     transform: rotate(180deg);
 }
 
+/* Enhanced Portfolio Section */
+.section-subtitle-enhanced {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 16px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.portfolio-grid-enhanced {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 50px;
+}
+
+@media (max-width: 992px) {
+    .portfolio-grid-enhanced {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .portfolio-grid-enhanced {
+        grid-template-columns: 1fr;
+    }
+
+    .section-subtitle-enhanced {
+        font-size: 1rem;
+    }
+}
+
 .services-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
