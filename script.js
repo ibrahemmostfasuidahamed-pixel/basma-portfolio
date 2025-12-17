@@ -4,6 +4,24 @@
 //   With Supabase Dynamic Content Loading
 // =====================================================
 
+// Toggle Services Show More/Less
+function toggleServices() {
+    const hiddenCards = document.querySelectorAll('.hidden-card');
+    const btn = document.getElementById('showMoreBtn');
+    const isExpanded = btn.classList.contains('expanded');
+
+    hiddenCards.forEach(card => {
+        if (isExpanded) {
+            card.classList.remove('show');
+        } else {
+            card.classList.add('show');
+        }
+    });
+
+    btn.classList.toggle('expanded');
+    btn.querySelector('span').textContent = isExpanded ? 'عرض المزيد' : 'عرض أقل';
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     // ===== Load Dynamic Content from Supabase =====
     loadDynamicContent();

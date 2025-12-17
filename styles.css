@@ -1296,6 +1296,53 @@ button {
     }
 }
 
+/* Hidden Cards */
+.hidden-card {
+    display: none !important;
+}
+
+.hidden-card.show {
+    display: block !important;
+    animation: cardFadeIn 0.5s ease forwards;
+}
+
+/* Show More Button */
+.show-more-container {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.btn-show-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 40px;
+    background: transparent;
+    border: 2px solid var(--accent-orange);
+    border-radius: 50px;
+    color: var(--accent-orange);
+    font-size: 1.1rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-show-more:hover {
+    background: var(--accent-orange);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+}
+
+.btn-show-more i {
+    transition: transform 0.3s ease;
+}
+
+.btn-show-more.expanded i {
+    transform: rotate(180deg);
+}
+
 .services-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);

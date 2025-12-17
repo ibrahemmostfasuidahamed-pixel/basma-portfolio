@@ -196,7 +196,7 @@
             <div class="section-header-center">
                 <h2 class="section-title-animated">ماذا تقدم بصمة</h2>
             </div>
-            <div class="services-grid-animated">
+            <div class="services-grid-animated" id="servicesGrid">
                 <div class="service-card-animated">
                     <div class="service-icon-animated"><i class="fas fa-video"></i></div>
                     <h3 class="service-title">انشاء فيديوهات Whiteboard Animation</h3>
@@ -209,18 +209,24 @@
                     <div class="service-icon-animated"><i class="fas fa-robot"></i></div>
                     <h3 class="service-title">AI System n8n</h3>
                 </div>
-                <div class="service-card-animated">
+                <div class="service-card-animated hidden-card">
                     <div class="service-icon-animated"><i class="fas fa-paint-brush"></i></div>
                     <h3 class="service-title">Design</h3>
                 </div>
-                <div class="service-card-animated">
+                <div class="service-card-animated hidden-card">
                     <div class="service-icon-animated"><i class="fas fa-film"></i></div>
                     <h3 class="service-title">Video Editing</h3>
                 </div>
-                <div class="service-card-animated">
+                <div class="service-card-animated hidden-card">
                     <div class="service-icon-animated"><i class="fas fa-lightbulb"></i></div>
                     <h3 class="service-title">Problem Solving</h3>
                 </div>
+            </div>
+            <div class="show-more-container">
+                <button class="btn-show-more" id="showMoreBtn" onclick="toggleServices()">
+                    <span>عرض المزيد</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
             </div>
         </div>
     </section>
