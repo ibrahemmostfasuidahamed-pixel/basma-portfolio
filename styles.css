@@ -1172,22 +1172,22 @@ button {
 .cofounder-badge {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 10px 24px;
+    gap: 12px;
+    padding: 14px 36px;
     background: linear-gradient(135deg, var(--accent-orange), #ff9a3c);
     border-radius: 50px;
     color: white;
-    font-size: 1rem;
-    font-weight: 700;
+    font-size: 1.4rem;
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 20px;
-    box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+    box-shadow: 0 15px 40px rgba(255, 107, 53, 0.5);
     animation: floatBadge 3s ease-in-out infinite;
 }
 
 .cofounder-badge i {
-    font-size: 0.9rem;
+    font-size: 1.2rem;
 }
 
 @keyframes floatBadge {
@@ -1198,13 +1198,13 @@ button {
     }
 
     50% {
-        transform: translateY(-8px);
+        transform: translateY(-10px);
     }
 }
 
 .profile-image-wrapper {
-    width: 280px;
-    height: 280px;
+    width: 350px;
+    height: 350px;
     border-radius: 50%;
     position: relative;
     margin: 0 auto;
