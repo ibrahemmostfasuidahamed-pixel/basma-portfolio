@@ -442,6 +442,7 @@ async function loadPortfolio() {
     }, 5000);
 
     try {
+        console.log('Loading portfolio from Supabase...');
         const { data, error } = await db.supabaseClient
             .from('portfolio')
             .select('*')
@@ -449,9 +450,13 @@ async function loadPortfolio() {
 
         clearTimeout(timeout);
 
+        console.log('Portfolio data:', data);
+        console.log('Portfolio error:', error);
+
         if (error) throw error;
 
         portfolioData = data || [];
+        console.log('Portfolio items count:', portfolioData.length);
         renderPortfolioTable();
         updateStats();
 
