@@ -431,6 +431,8 @@ async function loadPortfolio() {
     const loading = document.getElementById('portfolioLoading');
     const table = document.getElementById('portfolioTable');
 
+    if (!loading || !table) return;
+
     try {
         const { data, error } = await db.supabaseClient
             .from('portfolio')
@@ -447,6 +449,8 @@ async function loadPortfolio() {
         table.style.display = 'table';
     } catch (error) {
         console.error('Error loading portfolio:', error);
+        loading.style.display = 'none';
+        table.style.display = 'table';
     }
 }
 
