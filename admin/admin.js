@@ -19,9 +19,7 @@ async function loadDashboard() {
     await Promise.all([
         loadMenu(),
         loadServices(),
-        loadCourses(),
-        loadPortfolio(),
-        loadTestimonials()
+        loadPortfolio()
     ]);
 }
 
