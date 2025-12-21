@@ -3888,7 +3888,7 @@ button {
 
 /* ===== Floating WhatsApp Button ===== */
 .whatsapp-float {
-    position: fixed;
+    position: fixed !important;
     bottom: 100px;
     right: 30px;
     width: 60px;
@@ -3901,10 +3901,10 @@ button {
     color: white;
     font-size: 2rem;
     text-decoration: none;
-    z-index: 999;
+    z-index: 9999;
     box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);
     transition: all 0.3s ease;
-    animation: whatsappGlow 2s ease-in-out infinite;
+    animation: whatsappBounce 2s ease-in-out infinite, whatsappGlow 2s ease-in-out infinite;
 }
 
 @keyframes whatsappGlow {
@@ -3912,12 +3912,22 @@ button {
     0%,
     100% {
         box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);
-        transform: scale(1);
     }
 
     50% {
         box-shadow: 0 4px 40px rgba(37, 211, 102, 0.8), 0 0 60px rgba(37, 211, 102, 0.4);
-        transform: scale(1.05);
+    }
+}
+
+@keyframes whatsappBounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
     }
 }
 
