@@ -446,43 +446,47 @@ async function loadPortfolio() {
     const table = document.getElementById('portfolioTable');
     const tbody = document.getElementById('portfolioTableBody');
 
-    if (!loading || !table || !tbody) {
-        console.log('Portfolio elements not found');
+    // Hide loading, show table
+    if (loading) loading.style.display = 'none';
+    if (table) table.style.display = 'table';
+
+    if (!tbody) {
+        console.log('Portfolio tbody not found');
         return;
     }
 
+    // Fetch data
+    let data = [];
     try {
-        // Direct query to Supabase
-        const { data, error } = await db.supabaseClient
+        const result = await db.supabaseClient
             .from('portfolio')
             .select('*')
             .order('created_at', { ascending: false });
 
-        console.log('Portfolio loaded:', data?.length || 0, 'items');
-
-        if (error) {
-            console.error('Supabase error:', error);
-            throw error;
-        }
-
-        portfolioData = data || [];
-
-        // Render table
-        if (portfolioData.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 40px; color: rgba(255,255,255,0.5);">لا توجد أعمال - اضغط على "إضافة عمل" لإضافة عمل جديد</td></tr>';
+        if (result.error) {
+            console.error('Supabase error:', result.error);
         } else {
-            renderPortfolioTable();
+            data = result.data || [];
         }
+    } catch (err) {
+        console.error('Fetch error:', err);
+    }
 
+    portfolioData = data;
+    console.log('Portfolio items:', portfolioData.length);
+
+    // Render
+    if (portfolioData.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 40px; color: rgba(255,255,255,0.5);">لا توجد أعمال - اضغط على "إضافة عمل" لإضافة عمل جديد</td></tr>';
+    } else {
+        renderPortfolioTable();
+    }
+
+    // Update stats (with safety)
+    try {
         updateStats();
-        loading.style.display = 'none';
-        table.style.display = 'table';
-
-    } catch (error) {
-        console.error('Error loading portfolio:', error);
-        tbody.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 40px; color: #ff6b35;">خطأ في تحميل الأعمال - تأكد من إعدادات قاعدة البيانات</td></tr>';
-        loading.style.display = 'none';
-        table.style.display = 'table';
+    } catch (e) {
+        console.log('Stats update skipped');
     }
 }
 
