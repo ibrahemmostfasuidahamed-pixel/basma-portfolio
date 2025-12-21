@@ -430,43 +430,43 @@ let portfolioData = [];
 async function loadPortfolio() {
     const loading = document.getElementById('portfolioLoading');
     const table = document.getElementById('portfolioTable');
+    const tbody = document.getElementById('portfolioTableBody');
 
-    if (!loading || !table) return;
-
-    // Set timeout for loading
-    const timeout = setTimeout(() => {
-        loading.style.display = 'none';
-        table.style.display = 'table';
-        portfolioData = [];
-        renderPortfolioTable();
-    }, 5000);
+    if (!loading || !table || !tbody) {
+        console.log('Portfolio elements not found');
+        return;
+    }
 
     try {
-        console.log('Loading portfolio from Supabase...');
+        // Direct query to Supabase
         const { data, error } = await db.supabaseClient
             .from('portfolio')
             .select('*')
             .order('created_at', { ascending: false });
 
-        clearTimeout(timeout);
+        console.log('Portfolio loaded:', data?.length || 0, 'items');
 
-        console.log('Portfolio data:', data);
-        console.log('Portfolio error:', error);
-
-        if (error) throw error;
+        if (error) {
+            console.error('Supabase error:', error);
+            throw error;
+        }
 
         portfolioData = data || [];
-        console.log('Portfolio items count:', portfolioData.length);
-        renderPortfolioTable();
-        updateStats();
 
+        // Render table
+        if (portfolioData.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 40px; color: rgba(255,255,255,0.5);">لا توجد أعمال - اضغط على "إضافة عمل" لإضافة عمل جديد</td></tr>';
+        } else {
+            renderPortfolioTable();
+        }
+
+        updateStats();
         loading.style.display = 'none';
         table.style.display = 'table';
+
     } catch (error) {
-        clearTimeout(timeout);
         console.error('Error loading portfolio:', error);
-        portfolioData = [];
-        renderPortfolioTable();
+        tbody.innerHTML = '<tr><td colspan="5" style="text-align: center; padding: 40px; color: #ff6b35;">خطأ في تحميل الأعمال - تأكد من إعدادات قاعدة البيانات</td></tr>';
         loading.style.display = 'none';
         table.style.display = 'table';
     }
