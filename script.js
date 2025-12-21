@@ -482,6 +482,8 @@ async function loadPortfolio() {
         const items = await db.getPortfolio();
 
         if (items && items.length > 0) {
+            // Store portfolio data globally for modal access
+            window.portfolioData = items;
             portfolioGrid.innerHTML = items.map(item => createPortfolioCard(item)).join('');
         } else {
             portfolioGrid.innerHTML = `
@@ -498,17 +500,12 @@ async function loadPortfolio() {
 
 // ===== Create Portfolio Card =====
 function createPortfolioCard(item) {
-    const hasVideo = item.video_url && item.video_url.trim() !== '';
-    const embedUrl = hasVideo ? convertToEmbedUrl(item.video_url) : null;
-
     return `
-        <div class="portfolio-card reveal visible" onclick="${hasVideo ? `openVideoModal('${embedUrl}', '${item.title}')` : ''}">
+        <div class="portfolio-card reveal visible" onclick="openPortfolioDetails('${item.id}')">
             <div class="portfolio-thumbnail">
-                ${hasVideo ? `
-                    <div class="portfolio-video-badge">
-                        <i class="fas fa-play"></i>
-                    </div>
-                ` : ''}
+                <div class="portfolio-overlay">
+                    <i class="fas fa-eye"></i>
+                </div>
                 <img src="${item.image_url || 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&h=400&fit=crop'}" 
                      alt="${item.title}">
             </div>
@@ -518,6 +515,70 @@ function createPortfolioCard(item) {
             </div>
         </div>
     `;
+}
+
+// ===== Open Portfolio Details Modal =====
+function openPortfolioDetails(itemId) {
+    const item = window.portfolioData?.find(p => p.id === itemId);
+    if (!item) return;
+
+    // Create or get modal
+    let modal = document.getElementById('portfolioDetailModal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'portfolioDetailModal';
+        modal.className = 'portfolio-modal-overlay';
+        document.body.appendChild(modal);
+
+        // Close on click outside
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closePortfolioModal();
+        });
+
+        // Close on Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closePortfolioModal();
+        });
+    }
+
+    const hasVideo = item.video_url && item.video_url.trim() !== '';
+    const embedUrl = hasVideo ? convertToEmbedUrl(item.video_url) : null;
+
+    modal.innerHTML = `
+        <div class="portfolio-modal">
+            <button class="portfolio-modal-close" onclick="closePortfolioModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="portfolio-modal-image">
+                <img src="${item.image_url || 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&h=400&fit=crop'}" alt="${item.title}">
+            </div>
+            <div class="portfolio-modal-content">
+                <span class="portfolio-modal-category">${item.category || 'عام'}</span>
+                <h2 class="portfolio-modal-title">${item.title}</h2>
+                ${item.description ? `<p class="portfolio-modal-description">${item.description}</p>` : ''}
+                ${hasVideo ? `
+                    <div class="portfolio-modal-video">
+                        <iframe src="${embedUrl}" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                ` : ''}
+            </div>
+        </div>
+    `;
+
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closePortfolioModal() {
+    const modal = document.getElementById('portfolioDetailModal');
+    if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
 }
 
 // ===== Convert Video URL to Embed =====
