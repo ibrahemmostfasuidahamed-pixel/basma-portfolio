@@ -433,11 +433,21 @@ async function loadPortfolio() {
 
     if (!loading || !table) return;
 
+    // Set timeout for loading
+    const timeout = setTimeout(() => {
+        loading.style.display = 'none';
+        table.style.display = 'table';
+        portfolioData = [];
+        renderPortfolioTable();
+    }, 5000);
+
     try {
         const { data, error } = await db.supabaseClient
             .from('portfolio')
             .select('*')
             .order('created_at', { ascending: false });
+
+        clearTimeout(timeout);
 
         if (error) throw error;
 
@@ -448,7 +458,10 @@ async function loadPortfolio() {
         loading.style.display = 'none';
         table.style.display = 'table';
     } catch (error) {
+        clearTimeout(timeout);
         console.error('Error loading portfolio:', error);
+        portfolioData = [];
+        renderPortfolioTable();
         loading.style.display = 'none';
         table.style.display = 'table';
     }
