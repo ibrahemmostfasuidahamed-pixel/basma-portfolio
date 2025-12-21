@@ -713,17 +713,17 @@ async function deleteTestimonialConfirm(id) {
 
 // ===== Stats =====
 function updateStats() {
-    // Only update elements that exist
+    // Only update elements that exist and arrays are defined
     const coursesEl = document.getElementById('coursesCount');
     const portfolioEl = document.getElementById('portfolioCount');
     const testimonialsEl = document.getElementById('testimonialsCount');
     const studentsEl = document.getElementById('totalStudents');
 
-    if (coursesEl) coursesEl.textContent = coursesData.length;
-    if (portfolioEl) portfolioEl.textContent = portfolioData.length;
-    if (testimonialsEl) testimonialsEl.textContent = testimonialsData.length;
+    if (coursesEl && typeof coursesData !== 'undefined') coursesEl.textContent = coursesData.length;
+    if (portfolioEl && typeof portfolioData !== 'undefined') portfolioEl.textContent = portfolioData.length;
+    if (testimonialsEl && typeof testimonialsData !== 'undefined') testimonialsEl.textContent = testimonialsData.length;
 
-    if (studentsEl) {
+    if (studentsEl && typeof coursesData !== 'undefined') {
         const totalStudents = coursesData.reduce((sum, c) => sum + (c.students_count || 0), 0);
         studentsEl.textContent = totalStudents.toLocaleString();
     }
