@@ -5,22 +5,36 @@
 
 // ===== Auth Check =====
 (async () => {
-    const user = await db.getUser();
-    if (!user) {
-        window.location.href = 'index.html';
-        return;
+    try {
+        const user = await db.getUser();
+        if (!user) {
+            console.log('No user logged in, redirecting...');
+            window.location.href = 'index.html';
+            return;
+        }
+        document.getElementById('userEmail').textContent = user.email;
+        console.log('User logged in:', user.email);
+        loadDashboard();
+    } catch (error) {
+        console.error('Auth error:', error);
+        // Still try to load dashboard for debugging
+        loadDashboard();
     }
-    document.getElementById('userEmail').textContent = user.email;
-    loadDashboard();
 })();
 
 // ===== Load Dashboard Data =====
 async function loadDashboard() {
-    await Promise.all([
-        loadMenu(),
-        loadServices(),
-        loadPortfolio()
-    ]);
+    console.log('Loading dashboard...');
+    try {
+        await Promise.all([
+            loadMenu(),
+            loadServices(),
+            loadPortfolio()
+        ]);
+        console.log('Dashboard loaded successfully');
+    } catch (error) {
+        console.error('Dashboard load error:', error);
+    }
 }
 
 // ===== Menu Items =====
