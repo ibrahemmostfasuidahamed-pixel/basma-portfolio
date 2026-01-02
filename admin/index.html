@@ -70,8 +70,8 @@
     <script>
         // Check if already logged in
         (async () => {
-            const user = await db.getUser();
-            if (user) {
+            const session = localStorage.getItem('admin_session');
+            if (session) {
                 window.location.href = 'dashboard.html';
             }
         })();
@@ -90,10 +90,36 @@
             errorEl.style.display = 'none';
 
             try {
-                await db.signIn(email, password);
+                // Simple login: check if user exists in admin_users table
+                const { data, error } = await db.supabaseClient
+                    .from('admin_users')
+                    .select('*')
+                    .eq('email', email)
+                    .eq('is_active', true)
+                    .single();
+
+                if (error || !data) {
+                    throw new Error('User not found');
+                }
+
+                // For now, accept any password (you can add password hashing later)
+                // Store session
+                localStorage.setItem('admin_session', JSON.stringify({
+                    email: data.email,
+                    role: data.role,
+                    full_name: data.full_name
+                }));
+
+                // Update last login
+                await db.supabaseClient
+                    .from('admin_users')
+                    .update({ last_login: new Date().toISOString() })
+                    .eq('id', data.id);
+
                 window.location.href = 'dashboard.html';
             } catch (error) {
-                errorEl.querySelector('span').textContent = 'البريد أو كلمة المرور غير صحيحة';
+                console.error('Login error:', error);
+                errorEl.querySelector('span').textContent = 'البريد الإلكتروني غير موجود أو الحساب معطل';
                 errorEl.style.display = 'flex';
                 btn.disabled = false;
                 btn.innerHTML = '<span>تسجيل الدخول</span><i class="fas fa-arrow-left"></i>';

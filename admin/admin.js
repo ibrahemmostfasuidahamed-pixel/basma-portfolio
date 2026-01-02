@@ -13,16 +13,20 @@ let settingsData = {};
 // ===== Auth Check =====
 (async () => {
     try {
-        const user = await db.getUser();
-        if (!user) {
+        const session = localStorage.getItem('admin_session');
+        if (!session) {
             window.location.href = 'index.html';
             return;
         }
+
+        const user = JSON.parse(session);
         const emailEl = document.getElementById('userEmail');
         if (emailEl) emailEl.textContent = user.email;
+
         loadDashboard();
     } catch (error) {
         console.error('Auth error:', error);
+        localStorage.removeItem('admin_session');
         window.location.href = 'index.html';
     }
 })();
@@ -70,7 +74,7 @@ function showSection(section) {
 
 // ===== Logout =====
 async function logout() {
-    await db.signOut();
+    localStorage.removeItem('admin_session');
     window.location.href = 'index.html';
 }
 
