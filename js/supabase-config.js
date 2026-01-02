@@ -3,8 +3,8 @@
 //   بصمة - Basma Portfolio
 // =====================================================
 
-const SUPABASE_URL = 'https://iyqxegoofdygfxliqbhv.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml5cXhlZ29vZmR5Z2Z4bGlxYmh2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU0Njg1NDIsImV4cCI6MjA4MTA0NDU0Mn0.P3l8nyPSO4_1I9oecJ1yStOrm55pMwG3UMdA9hgn6tQ';
+const SUPABASE_URL = 'https://lkrcllihsgvkdizcjumt.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxrcmNsbGloc2d2a2RpemNqdW10Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjczOTI1MzIsImV4cCI6MjA4Mjk2ODUzMn0.ucFFc1m6RmfqlEPS9WlYycx6yMYwySa5g0TwStBl0EA';
 
 // Initialize Supabase Client
 const { createClient } = supabase;
