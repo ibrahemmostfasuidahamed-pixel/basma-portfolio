@@ -127,8 +127,96 @@ async function loadUsers() {
 }
 
 function openUserModal(userId = null) {
-    // TODO: Implement user modal
-    showToast('قريباً: نافذة إضافة/تعديل مستخدم', 'info');
+    const user = userId ? usersData.find(u => u.id === userId) : null;
+    const isEdit = !!user;
+
+    const modalHTML = `
+        <div class="modal-overlay active" id="userModal">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3 class="modal-title">${isEdit ? 'تعديل مستخدم' : 'إضافة مستخدم جديد'}</h3>
+                    <button class="modal-close" onclick="closeModal('userModal')">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <form id="userForm" onsubmit="saveUser(event, '${userId || ''}')">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>البريد الإلكتروني *</label>
+                            <input type="email" name="email" class="form-control" value="${user?.email || ''}" required ${isEdit ? 'readonly' : ''}>
+                        </div>
+                        <div class="form-group">
+                            <label>الاسم الكامل</label>
+                            <input type="text" name="full_name" class="form-control" value="${user?.full_name || ''}">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>الصلاحية</label>
+                                <select name="role" class="form-control">
+                                    <option value="admin" ${user?.role === 'admin' ? 'selected' : ''}>مدير</option>
+                                    <option value="super_admin" ${user?.role === 'super_admin' ? 'selected' : ''}>مدير عام</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; margin-top: 30px;">
+                                    <input type="checkbox" name="is_active" ${user?.is_active !== false ? 'checked' : ''}>
+                                    <span>نشط</span>
+                                </label>
+                            </div>
+                        </div>
+                        ${!isEdit ? `
+                        <div class="form-group">
+                            <label>كلمة المرور *</label>
+                            <input type="password" name="password" class="form-control" required>
+                        </div>
+                        ` : ''}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" onclick="closeModal('userModal')">إلغاء</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> حفظ</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    `;
+
+    document.getElementById('modalContainer').innerHTML = modalHTML;
+}
+
+async function saveUser(event, userId) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+
+    const userData = {
+        email: formData.get('email'),
+        full_name: formData.get('full_name'),
+        role: formData.get('role'),
+        is_active: formData.get('is_active') === 'on',
+        updated_at: new Date().toISOString()
+    };
+
+    if (!userId) {
+        userData.password_hash = formData.get('password'); // Simple password storage
+        userData.created_at = new Date().toISOString();
+    }
+
+    try {
+        if (userId) {
+            const { error } = await db.supabaseClient.from('admin_users').update(userData).eq('id', userId);
+            if (error) throw error;
+            showToast('تم تحديث المستخدم بنجاح', 'success');
+        } else {
+            const { error } = await db.supabaseClient.from('admin_users').insert([userData]);
+            if (error) throw error;
+            showToast('تم إضافة المستخدم بنجاح', 'success');
+        }
+        closeModal('userModal');
+        loadUsers();
+        updateStats();
+    } catch (error) {
+        console.error('Error saving user:', error);
+        showToast('حدث خطأ أثناء الحفظ', 'error');
+    }
 }
 
 function editUser(id) {
@@ -203,7 +291,127 @@ async function loadServices() {
 }
 
 function openServiceModal(serviceId = null) {
-    showToast('قريباً: نافذة إضافة/تعديل خدمة', 'info');
+    const service = serviceId ? servicesData.find(s => s.id === serviceId) : null;
+    const isEdit = !!service;
+
+    const modalHTML = `
+        <div class="modal-overlay active" id="serviceModal">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3 class="modal-title">${isEdit ? 'تعديل خدمة' : 'إضافة خدمة جديدة'}</h3>
+                    <button class="modal-close" onclick="closeModal('serviceModal')">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <form id="serviceForm" onsubmit="saveService(event, '${serviceId || ''}')">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>العنوان *</label>
+                            <input type="text" name="title" class="form-control" value="${service?.title || ''}" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>الوصف</label>
+                            <textarea name="description" class="form-control" rows="3">${service?.description || ''}</textarea>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>الأيقونة (Font Awesome)</label>
+                                <input type="text" name="icon" class="form-control" value="${service?.icon || 'fas fa-cog'}" placeholder="fas fa-cog">
+                            </div>
+
+                            <div class="form-group">
+                                <label>الترتيب</label>
+                                <input type="number" name="sort_order" class="form-control" value="${service?.sort_order || 0}" min="0">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>رابط الصورة</label>
+                            <input type="url" name="image_url" class="form-control" value="${service?.image_url || ''}" placeholder="https://...">
+                        </div>
+
+                        <div class="form-group">
+                            <label>رابط الفيديو (YouTube)</label>
+                            <input type="url" name="video_url" class="form-control" value="${service?.video_url || ''}" placeholder="https://youtube.com/watch?v=...">
+                        </div>
+
+                        <div class="form-group">
+                            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                                <input type="checkbox" name="is_active" ${service?.is_active !== false ? 'checked' : ''}>
+                                <span>نشط (يظهر في الموقع)</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" onclick="closeModal('serviceModal')">إلغاء</button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> حفظ
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    `;
+
+    const container = document.getElementById('modalContainer');
+    container.innerHTML = modalHTML;
+}
+
+async function saveService(event, serviceId) {
+    event.preventDefault();
+    const form = event.target;
+    const formData = new FormData(form);
+
+    const serviceData = {
+        title: formData.get('title'),
+        description: formData.get('description'),
+        icon: formData.get('icon'),
+        image_url: formData.get('image_url'),
+        video_url: formData.get('video_url'),
+        sort_order: parseInt(formData.get('sort_order')) || 0,
+        is_active: formData.get('is_active') === 'on',
+        updated_at: new Date().toISOString()
+    };
+
+    try {
+        if (serviceId) {
+            // Update existing
+            const { error } = await db.supabaseClient
+                .from('services')
+                .update(serviceData)
+                .eq('id', serviceId);
+
+            if (error) throw error;
+            showToast('تم تحديث الخدمة بنجاح', 'success');
+        } else {
+            // Create new
+            serviceData.created_at = new Date().toISOString();
+            const { error } = await db.supabaseClient
+                .from('services')
+                .insert([serviceData]);
+
+            if (error) throw error;
+            showToast('تم إضافة الخدمة بنجاح', 'success');
+        }
+
+        closeModal('serviceModal');
+        loadServices();
+        updateStats();
+    } catch (error) {
+        console.error('Error saving service:', error);
+        showToast('حدث خطأ أثناء الحفظ', 'error');
+    }
+}
+
+function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.classList.remove('active');
+        setTimeout(() => modal.remove(), 300);
+    }
+    document.body.style.overflow = '';
 }
 
 function editService(id) {
@@ -277,7 +485,108 @@ async function loadPortfolio() {
 }
 
 function openPortfolioModal(itemId = null) {
-    showToast('قريباً: نافذة إضافة/تعديل عمل', 'info');
+    const item = itemId ? portfolioData.find(p => p.id === itemId) : null;
+    const isEdit = !!item;
+
+    const modalHTML = `
+        <div class="modal-overlay active" id="portfolioModal">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3 class="modal-title">${isEdit ? 'تعديل عمل' : 'إضافة عمل جديد'}</h3>
+                    <button class="modal-close" onclick="closeModal('portfolioModal')">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <form id="portfolioForm" onsubmit="savePortfolio(event, '${itemId || ''}')">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>العنوان *</label>
+                            <input type="text" name="title" class="form-control" value="${item?.title || ''}" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>التصنيف</label>
+                            <input type="text" name="category" class="form-control" value="${item?.category || ''}" placeholder="مثال: موشن جرافيك">
+                        </div>
+
+                        <div class="form-group">
+                            <label>الوصف</label>
+                            <textarea name="description" class="form-control" rows="3">${item?.description || ''}</textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>رابط الصورة</label>
+                            <input type="url" name="image_url" class="form-control" value="${item?.image_url || ''}" placeholder="https://...">
+                        </div>
+
+                        <div class="form-group">
+                            <label>رابط الفيديو (YouTube)</label>
+                            <input type="url" name="video_url" class="form-control" value="${item?.video_url || ''}" placeholder="https://youtube.com/watch?v=...">
+                        </div>
+
+                        <div class="form-group">
+                            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                                <input type="checkbox" name="is_published" ${item?.is_published !== false ? 'checked' : ''}>
+                                <span>منشور (يظهر في الموقع)</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" onclick="closeModal('portfolioModal')">إلغاء</button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> حفظ
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    `;
+
+    const container = document.getElementById('modalContainer');
+    container.innerHTML = modalHTML;
+}
+
+async function savePortfolio(event, itemId) {
+    event.preventDefault();
+    const form = event.target;
+    const formData = new FormData(form);
+
+    const portfolioData = {
+        title: formData.get('title'),
+        category: formData.get('category'),
+        description: formData.get('description'),
+        image_url: formData.get('image_url'),
+        video_url: formData.get('video_url'),
+        is_published: formData.get('is_published') === 'on',
+        updated_at: new Date().toISOString()
+    };
+
+    try {
+        if (itemId) {
+            const { error } = await db.supabaseClient
+                .from('portfolio')
+                .update(portfolioData)
+                .eq('id', itemId);
+
+            if (error) throw error;
+            showToast('تم تحديث العمل بنجاح', 'success');
+        } else {
+            portfolioData.created_at = new Date().toISOString();
+            const { error } = await db.supabaseClient
+                .from('portfolio')
+                .insert([portfolioData]);
+
+            if (error) throw error;
+            showToast('تم إضافة العمل بنجاح', 'success');
+        }
+
+        closeModal('portfolioModal');
+        loadPortfolio();
+        updateStats();
+    } catch (error) {
+        console.error('Error saving portfolio:', error);
+        showToast('حدث خطأ أثناء الحفظ', 'error');
+    }
 }
 
 function editPortfolio(id) {
@@ -352,7 +661,92 @@ async function loadMenu() {
 }
 
 function openMenuModal(itemId = null) {
-    showToast('قريباً: نافذة إضافة/تعديل عنصر قائمة', 'info');
+    const item = itemId ? menuData.find(m => m.id === itemId) : null;
+    const isEdit = !!item;
+
+    const modalHTML = `
+        <div class="modal-overlay active" id="menuModal">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3 class="modal-title">${isEdit ? 'تعديل عنصر قائمة' : 'إضافة عنصر جديد'}</h3>
+                    <button class="modal-close" onclick="closeModal('menuModal')">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <form id="menuForm" onsubmit="saveMenu(event, '${itemId || ''}')">
+                    <div class="modal-body">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>التسمية *</label>
+                                <input type="text" name="label" class="form-control" value="${item?.label || ''}" required>
+                            </div>
+                            <div class="form-group">
+                                <label>الرابط *</label>
+                                <input type="text" name="url" class="form-control" value="${item?.url || ''}" required placeholder="#section">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>النوع</label>
+                                <select name="type" class="form-control">
+                                    <option value="link" ${item?.type === 'link' ? 'selected' : ''}>رابط عادي</option>
+                                    <option value="cta" ${item?.type === 'cta' ? 'selected' : ''}>زر CTA</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>الترتيب</label>
+                                <input type="number" name="sort_order" class="form-control" value="${item?.sort_order || 0}" min="0">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                                <input type="checkbox" name="is_active" ${item?.is_active !== false ? 'checked' : ''}>
+                                <span>نشط</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" onclick="closeModal('menuModal')">إلغاء</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> حفظ</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    `;
+
+    document.getElementById('modalContainer').innerHTML = modalHTML;
+}
+
+async function saveMenu(event, itemId) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+
+    const menuData = {
+        label: formData.get('label'),
+        url: formData.get('url'),
+        type: formData.get('type'),
+        sort_order: parseInt(formData.get('sort_order')) || 0,
+        is_active: formData.get('is_active') === 'on'
+    };
+
+    try {
+        if (itemId) {
+            const { error } = await db.supabaseClient.from('menu_items').update(menuData).eq('id', itemId);
+            if (error) throw error;
+            showToast('تم تحديث العنصر بنجاح', 'success');
+        } else {
+            menuData.created_at = new Date().toISOString();
+            const { error } = await db.supabaseClient.from('menu_items').insert([menuData]);
+            if (error) throw error;
+            showToast('تم إضافة العنصر بنجاح', 'success');
+        }
+        closeModal('menuModal');
+        loadMenu();
+        updateStats();
+    } catch (error) {
+        console.error('Error saving menu:', error);
+        showToast('حدث خطأ أثناء الحفظ', 'error');
+    }
 }
 
 function editMenu(id) {
