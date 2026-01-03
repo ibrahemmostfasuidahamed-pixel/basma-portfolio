@@ -243,7 +243,8 @@ async function loadDynamicContent() {
             loadServices(),
             loadCourses(),
             loadPortfolio(),
-            loadTestimonials()
+            loadTestimonials(),
+            loadSettings()
         ]);
 
         console.log('✅ Dynamic content loaded from Supabase');
@@ -737,3 +738,73 @@ function throttle(func, limit) {
         }
     };
 }
+
+// ===== Load Settings =====
+async function loadSettings() {
+    try {
+        const { data: settings, error } = await db.supabaseClient
+            .from('site_settings')
+            .select('*');
+
+        if (error) throw error;
+
+        if (settings && settings.length > 0) {
+            // Convert array to object for easy access
+            const settingsObj = {};
+            settings.forEach(s => {
+                settingsObj[s.setting_key] = s.setting_value;
+            });
+
+            // Apply settings to the website
+
+            // Update WhatsApp button if exists
+            const whatsappBtn = document.querySelector('a[href*="wa.me"]');
+            if (whatsappBtn && settingsObj.whatsapp_number) {
+                whatsappBtn.href = `https://wa.me/${settingsObj.whatsapp_number}`;
+            }
+
+            // Update social links
+            const socialLinks = {
+                youtube: document.querySelector('a[href*="youtube"]'),
+                instagram: document.querySelector('a[href*="instagram"]'),
+                tiktok: document.querySelector('a[href*="tiktok"]'),
+                twitter: document.querySelector('a[href*="twitter"]')
+            };
+
+            if (socialLinks.youtube && settingsObj.youtube_url) {
+                socialLinks.youtube.href = settingsObj.youtube_url;
+            }
+            if (socialLinks.instagram && settingsObj.instagram_url) {
+                socialLinks.instagram.href = settingsObj.instagram_url;
+            }
+            if (socialLinks.tiktok && settingsObj.tiktok_url) {
+                socialLinks.tiktok.href = settingsObj.tiktok_url;
+            }
+            if (socialLinks.twitter && settingsObj.twitter_url) {
+                socialLinks.twitter.href = settingsObj.twitter_url;
+            }
+
+            // Update page title and description
+            if (settingsObj.site_name) {
+                const titleParts = document.title.split('|');
+                if (titleParts.length > 1) {
+                    document.title = `${settingsObj.site_name} | ${titleParts[1].trim()}`;
+                } else {
+                    document.title = settingsObj.site_name;
+                }
+            }
+
+            if (settingsObj.site_description) {
+                const metaDesc = document.querySelector('meta[name="description"]');
+                if (metaDesc) {
+                    metaDesc.content = settingsObj.site_description;
+                }
+            }
+
+            console.log('✅ Settings applied from admin panel');
+        }
+    } catch (error) {
+        console.error('Error loading settings:', error);
+    }
+}
+
