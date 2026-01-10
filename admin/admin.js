@@ -395,7 +395,7 @@ async function savePortfolio(event, itemId) {
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الحفظ...';
 
     try {
-        const portfolioData = {
+        const portfolioItem = {
             title: formData.get('title'),
             category: formData.get('category'),
             description: formData.get('description'),
@@ -409,28 +409,28 @@ async function savePortfolio(event, itemId) {
         if (imageFile && imageFile.size > 0) {
             showToast('جاري رفع الصورة...', 'info');
             const imageUrl = await uploadImage(imageFile, 'portfolio');
-            portfolioData.image_url = imageUrl;
+            portfolioItem.image_url = imageUrl;
         } else if (itemId) {
             // Keep existing image if editing and no new image uploaded
             const existingItem = portfolioData.find(p => p.id === itemId);
             if (existingItem) {
-                portfolioData.image_url = existingItem.image_url;
+                portfolioItem.image_url = existingItem.image_url;
             }
         }
 
         if (itemId) {
             const { error } = await db.supabaseClient
                 .from('portfolio')
-                .update(portfolioData)
+                .update(portfolioItem)
                 .eq('id', itemId);
 
             if (error) throw error;
             showToast('تم تحديث العمل بنجاح', 'success');
         } else {
-            portfolioData.created_at = new Date().toISOString();
+            portfolioItem.created_at = new Date().toISOString();
             const { error } = await db.supabaseClient
                 .from('portfolio')
-                .insert([portfolioData]);
+                .insert([portfolioItem]);
 
             if (error) throw error;
             showToast('تم إضافة العمل بنجاح', 'success');
