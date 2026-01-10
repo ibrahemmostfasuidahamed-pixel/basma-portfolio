@@ -118,4 +118,8 @@ Supabase بيحذرك إن الجداول التالية مفتوحة للعام
 
 ✅ `portfolio` - 5 policies  
 ✅ `admin_users` - 4 policies  
-✅ `site_settings` - 3 policies
+✅ `site_settings` - 3 policies  
+✅ `services` - 5 policies  
+✅ `menu_items` - 5 policies
+
+**إجمالي: 5 جداول محمية بـ 22 policy** 🔒

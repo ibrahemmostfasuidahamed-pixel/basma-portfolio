@@ -97,6 +97,80 @@ TO anon, authenticated
 WITH CHECK (true);
 
 -- =====================================================
+-- 4. SERVICES TABLE
+-- =====================================================
+
+-- Enable RLS on services table
+ALTER TABLE public.services ENABLE ROW LEVEL SECURITY;
+
+-- Allow public read access to active services
+CREATE POLICY "Allow public read active services"
+ON public.services FOR SELECT
+TO public
+USING (is_active = true);
+
+-- Allow anon and authenticated users to read all services
+CREATE POLICY "Allow anon read all services"
+ON public.services FOR SELECT
+TO anon, authenticated
+USING (true);
+
+-- Allow anon and authenticated users to insert services
+CREATE POLICY "Allow anon insert services"
+ON public.services FOR INSERT
+TO anon, authenticated
+WITH CHECK (true);
+
+-- Allow anon and authenticated users to update services
+CREATE POLICY "Allow anon update services"
+ON public.services FOR UPDATE
+TO anon, authenticated
+USING (true);
+
+-- Allow anon and authenticated users to delete services
+CREATE POLICY "Allow anon delete services"
+ON public.services FOR DELETE
+TO anon, authenticated
+USING (true);
+
+-- =====================================================
+-- 5. MENU_ITEMS TABLE
+-- =====================================================
+
+-- Enable RLS on menu_items table
+ALTER TABLE public.menu_items ENABLE ROW LEVEL SECURITY;
+
+-- Allow public read access to active menu items
+CREATE POLICY "Allow public read active menu_items"
+ON public.menu_items FOR SELECT
+TO public
+USING (is_active = true);
+
+-- Allow anon and authenticated users to read all menu items
+CREATE POLICY "Allow anon read all menu_items"
+ON public.menu_items FOR SELECT
+TO anon, authenticated
+USING (true);
+
+-- Allow anon and authenticated users to insert menu items
+CREATE POLICY "Allow anon insert menu_items"
+ON public.menu_items FOR INSERT
+TO anon, authenticated
+WITH CHECK (true);
+
+-- Allow anon and authenticated users to update menu items
+CREATE POLICY "Allow anon update menu_items"
+ON public.menu_items FOR UPDATE
+TO anon, authenticated
+USING (true);
+
+-- Allow anon and authenticated users to delete menu items
+CREATE POLICY "Allow anon delete menu_items"
+ON public.menu_items FOR DELETE
+TO anon, authenticated
+USING (true);
+
+-- =====================================================
 -- NOTES:
 -- =====================================================
 -- 
