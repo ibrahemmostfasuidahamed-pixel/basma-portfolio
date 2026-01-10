@@ -14,22 +14,22 @@
 
 -- 2. Then run these policies:
 
--- Allow authenticated users to upload images
-CREATE POLICY "Allow authenticated uploads"
+-- Allow anyone (including anon users) to upload images
+CREATE POLICY "Allow anon uploads"
 ON storage.objects FOR INSERT
-TO authenticated
+TO anon, authenticated
 WITH CHECK (bucket_id = 'images');
 
--- Allow authenticated users to update their images
-CREATE POLICY "Allow authenticated updates"
+-- Allow anyone (including anon users) to update images
+CREATE POLICY "Allow anon updates"
 ON storage.objects FOR UPDATE
-TO authenticated
+TO anon, authenticated
 USING (bucket_id = 'images');
 
--- Allow authenticated users to delete images
-CREATE POLICY "Allow authenticated deletes"
+-- Allow anyone (including anon users) to delete images
+CREATE POLICY "Allow anon deletes"
 ON storage.objects FOR DELETE
-TO authenticated
+TO anon, authenticated
 USING (bucket_id = 'images');
 
 -- Allow public read access to all images
