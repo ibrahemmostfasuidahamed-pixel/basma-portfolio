@@ -17,7 +17,7 @@
         <aside class="sidebar">
             <div class="sidebar-header">
                 <div class="sidebar-logo">
-                    <img src="../logo.jpeg" alt="بصمة">
+                    <img src="../logo no bag.png" alt="بصمة">
                     <span>بصمة</span>
                 </div>
             </div>
@@ -31,17 +31,9 @@
                     <i class="fas fa-users-cog"></i>
                     <span>المستخدمين</span>
                 </a>
-                <a href="javascript:void(0)" class="nav-item" onclick="showSection('services')">
-                    <i class="fas fa-cogs"></i>
-                    <span>الخدمات</span>
-                </a>
                 <a href="javascript:void(0)" class="nav-item" onclick="showSection('portfolio')">
                     <i class="fas fa-folder-open"></i>
                     <span>الأعمال</span>
-                </a>
-                <a href="javascript:void(0)" class="nav-item" onclick="showSection('menu')">
-                    <i class="fas fa-bars"></i>
-                    <span>القائمة</span>
                 </a>
                 <a href="javascript:void(0)" class="nav-item" onclick="showSection('settings')">
                     <i class="fas fa-cog"></i>
@@ -83,32 +75,12 @@
                     </div>
 
                     <div class="stat-card">
-                        <div class="stat-icon blue">
-                            <i class="fas fa-cogs"></i>
-                        </div>
-                        <div class="stat-info">
-                            <div class="stat-value" id="servicesCount">0</div>
-                            <div class="stat-label">الخدمات</div>
-                        </div>
-                    </div>
-
-                    <div class="stat-card">
                         <div class="stat-icon green">
                             <i class="fas fa-folder-open"></i>
                         </div>
                         <div class="stat-info">
                             <div class="stat-value" id="portfolioCount">0</div>
                             <div class="stat-label">الأعمال</div>
-                        </div>
-                    </div>
-
-                    <div class="stat-card">
-                        <div class="stat-icon purple">
-                            <i class="fas fa-bars"></i>
-                        </div>
-                        <div class="stat-info">
-                            <div class="stat-value" id="menuCount">0</div>
-                            <div class="stat-label">عناصر القائمة</div>
                         </div>
                     </div>
                 </div>
@@ -120,10 +92,6 @@
                         <button class="action-btn" onclick="showSection('users'); openUserModal()">
                             <i class="fas fa-user-plus"></i>
                             <span>إضافة مستخدم</span>
-                        </button>
-                        <button class="action-btn" onclick="showSection('services'); openServiceModal()">
-                            <i class="fas fa-plus-circle"></i>
-                            <span>إضافة خدمة</span>
                         </button>
                         <button class="action-btn" onclick="showSection('portfolio'); openPortfolioModal()">
                             <i class="fas fa-folder-plus"></i>
@@ -165,33 +133,7 @@
                 </div>
             </section>
 
-            <!-- Services Section -->
-            <section id="services-section" class="content-section" style="display: none;">
-                <div class="section-header">
-                    <h2><i class="fas fa-cogs"></i> إدارة الخدمات</h2>
-                    <button class="btn btn-primary" onclick="openServiceModal()">
-                        <i class="fas fa-plus"></i> إضافة خدمة
-                    </button>
-                </div>
-                <div class="data-table-container">
-                    <div id="servicesLoading" class="loading">
-                        <div class="spinner"></div>
-                    </div>
-                    <table class="data-table" id="servicesTable" style="display: none;">
-                        <thead>
-                            <tr>
-                                <th>الصورة</th>
-                                <th>العنوان</th>
-                                <th>الأيقونة</th>
-                                <th>الترتيب</th>
-                                <th>الحالة</th>
-                                <th>الإجراءات</th>
-                            </tr>
-                        </thead>
-                        <tbody id="servicesTableBody"></tbody>
-                    </table>
-                </div>
-            </section>
+
 
             <!-- Portfolio Section -->
             <section id="portfolio-section" class="content-section" style="display: none;">
@@ -220,33 +162,7 @@
                 </div>
             </section>
 
-            <!-- Menu Section -->
-            <section id="menu-section" class="content-section" style="display: none;">
-                <div class="section-header">
-                    <h2><i class="fas fa-bars"></i> إدارة القائمة</h2>
-                    <button class="btn btn-primary" onclick="openMenuModal()">
-                        <i class="fas fa-plus"></i> إضافة عنصر
-                    </button>
-                </div>
-                <div class="data-table-container">
-                    <div id="menuLoading" class="loading">
-                        <div class="spinner"></div>
-                    </div>
-                    <table class="data-table" id="menuTable" style="display: none;">
-                        <thead>
-                            <tr>
-                                <th>التسمية</th>
-                                <th>الرابط</th>
-                                <th>النوع</th>
-                                <th>الترتيب</th>
-                                <th>الحالة</th>
-                                <th>الإجراءات</th>
-                            </tr>
-                        </thead>
-                        <tbody id="menuTableBody"></tbody>
-                    </table>
-                </div>
-            </section>
+
 
             <!-- Settings Section -->
             <section id="settings-section" class="content-section" style="display: none;">
